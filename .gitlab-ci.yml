@@ -1,6 +1,7 @@
 say-hello :
   image : alpine:latest
   script:
+    - #!/usr/bin/expect -f
     - echo 'hello world !!'
     - ls
     - scp usersspringboot/target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:~/
