@@ -1,0 +1,9 @@
+image: maven:latest
+
+
+deploy:
+  stage: deploy
+  script:
+    - java -jar usersspringboot-0.0.1-SNAPSHOT
+  only:
+    - master
