@@ -4,6 +4,4 @@ say-hello :
     - echo 'hello world !!'
     - ls
     - scp usersspringboot/target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:~/
-    - expect "assword:"
     - send -- "$env(USER_PASSWORD_VM)\r"
-    - expect eof
