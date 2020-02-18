@@ -1,6 +1,5 @@
 image: maven:latest
 say-hello :
-  image : alpine:latest
   script:
     - echo 'hello world !!'
     - ls
