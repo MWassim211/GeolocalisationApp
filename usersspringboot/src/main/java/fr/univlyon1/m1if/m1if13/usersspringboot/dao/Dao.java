@@ -1,4 +1,4 @@
-package fr.univlyon1.m1if.m1if13.usersspringboot.DAO;
+package fr.univlyon1.m1if.m1if13.usersspringboot.dao;
 
 import java.util.Optional;
 import java.util.Set;

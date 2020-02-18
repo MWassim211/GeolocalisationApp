@@ -3,5 +3,4 @@ say-hello :
   script:
     - echo 'hello world !!'
     - ls
-    - mvn package
-    - /usr/bin/scp usersspringboot/target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:~/
+    - ssh etudiant@192.168.75.26

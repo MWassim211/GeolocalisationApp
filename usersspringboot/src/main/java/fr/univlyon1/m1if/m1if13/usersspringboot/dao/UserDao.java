@@ -1,14 +1,23 @@
-package fr.univlyon1.m1if.m1if13.usersspringboot.DAO;
+package fr.univlyon1.m1if.m1if13.usersspringboot.dao;
 
+import fr.univlyon1.m1if.m1if13.usersspringboot.dao.Dao;
 import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
-import fr.univlyon1.m1if.m1if13.usersspringboot.DAO.Dao;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.stereotype.Component;
+    
+@Component 
 public class UserDao implements Dao<User> {
     private ArrayList<User> users = new ArrayList<User>();
+
+    public UserDao() {
+        users.add(new User("admin", "rpa"));
+        users.add(new User("Susan", "rpa"));
+    }
 
     @Override
     public Optional<User> get(String id){
