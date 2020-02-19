@@ -1,8 +1,8 @@
 image: maven:latest
-say-hello :
+deploy:
   script:
     - echo 'hello world !!'
     - ls
     - cd usersspringboot/
-    - mvn clean
     - ssh etudiant@192.168.75.26
+    - mvn clean
