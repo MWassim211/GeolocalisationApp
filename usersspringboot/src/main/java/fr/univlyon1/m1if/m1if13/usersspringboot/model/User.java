@@ -9,6 +9,10 @@ public class User {
     // Permet d'invalider une connexion même si le token est toujours valide
     private boolean connected;
 
+    public User(){
+        // Default constructor for Jackson
+    }
+
     public User(String login, String password) {
         this.login = login;
         this.password = password;

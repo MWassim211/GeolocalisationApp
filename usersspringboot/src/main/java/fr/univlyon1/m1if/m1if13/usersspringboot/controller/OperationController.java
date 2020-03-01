@@ -1,6 +1,5 @@
 package fr.univlyon1.m1if.m1if13.usersspringboot.controller;
 
-import java.net.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
@@ -10,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import com.auth0.jwt.interfaces.Claim;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,18 +18,13 @@ import org.springframework.web.bind.annotation.*;
 import fr.univlyon1.m1if.m1if13.usersspringboot.dao.UserDao;
 import fr.univlyon1.m1if.m1if13.usersspringboot.helpers.AuthHelper;
 import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
+import io.swagger.v3.oas.annotations.Operation;
 
-//import fr.univlyon1.m1if.m1if13.usersspringboot.helpers.JwtDemo;
 
 @Controller
 public class OperationController {
 
     // TODO récupérer le DAO...
-    
-    
-    
-    
-    
     @Autowired
     UserDao userDao;
 
@@ -44,7 +39,10 @@ public class OperationController {
      *         404).
      */
 
+  
+  @RequestMapping(path = "/testme", method = RequestMethod.GET)
     @PostMapping("/login")
+    @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
     public ResponseEntity<String> login(@RequestParam("login") String login, @RequestParam("password") String password,@RequestHeader("Origin") String origin) {
         HashSet<String> allUsers = (HashSet<String>) userDao.getAll();
         if (allUsers.contains(login)) {
@@ -52,15 +50,21 @@ public class OperationController {
             User user = opUser.get();
             try {
                 user.authenticate(password);
-                return ResponseEntity.ok().header("Authentication", AuthHelper.createToken(login,origin))
-                .body("Custom header set");
+                HttpHeaders headers = new HttpHeaders();
+                headers.add("Authentication", AuthHelper.createToken(login,origin));
+                headers.add("Access-Control-Expose-Headers","Authentication");
+                //return ResponseEntity.ok().header(headers).build();
+                return new ResponseEntity<>(headers, HttpStatus.OK);
             }catch(Exception e) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         }else{
+            //throw new RuntimeException();
+            //System.out.println("errreur");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
 
     /*@GetMapping("/login")
     public ResponseEntity<String> login(@RequestParam("login") String login, @RequestParam("password") String password, @RequestHeader("Origin") String origin) {
@@ -87,14 +91,18 @@ public class OperationController {
      * @param origin L'origine de la requête (pour la comparer avec celle du client, stockée dans le token JWT)
      * @return Une réponse vide avec un code de statut approprié (204, 400, 401).
      */
+
     @GetMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestParam("token") String token, @RequestParam("origin") String origin) {
-      
+        System.out.println("auto");
         HashMap<String, Claim> claims = (HashMap<String, Claim>) AuthHelper.verifyToken(token);
         if(claims.get("Origin").toString().equals(origin)){
-            return new ResponseEntity<>(HttpStatus.OK);
+            //return new ResponseEntity<>(HttpStatus.OK);
+        throw new RuntimeException();
         }else{
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            //return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            System.out.println("slkflsdf");
+            throw new RuntimeException();
         }
         
     }
