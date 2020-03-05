@@ -29,13 +29,24 @@ import fr.univlyon1.m1if.m1if13.usersspringboot.dao.UserDao;
 import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
 import fr.univlyon1.m1if.m1if13.usersspringboot.service.UserCredentialsException;
 import fr.univlyon1.m1if.m1if13.usersspringboot.service.UserNotFoundException;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.*;
+import io.swagger.*;
+import io.swagger.v3.oas.annotations.callbacks.*;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.parameters.*;
 
+
+@OpenAPIDefinition(
+            info = @Info(
+                    title = "TP1 & TP2",
+                    version = "0.0",
+                    description = "Api operations"
+            ))
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class apiController {
@@ -43,10 +54,15 @@ public class apiController {
     @Autowired
     UserDao userDao;
 
-    
-    @ApiOperation(value = "Creates new project", response = User.class)
-    @ApiResponses({ @ApiResponse(code = 200, message = "OK")})
+
     @GetMapping(path = "/users", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Operation(summary = "Rècupérer la liste des utilisateurs", 
+                description = "Renvoie les logins des utilisateurs",
+                tags = {"groupes"},
+                operationId = "users",
+                responses = {
+                    @ApiResponse(responseCode = "200", description = "Succesfull operation" , content = {@Content(mediaType = "application/json"), @Content(mediaType = "application/xml"),@Content(mediaType = "text/html")}),
+                    })
     public Set<String> users() {
         return userDao.getAll();
     }
@@ -58,19 +74,16 @@ public class apiController {
         return model;
     }
 
-    @GetMapping(path = "/users/{login}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public User getUser(@PathVariable String login) throws UserNotFoundException {
-        if (userDao.get(login).isPresent()) {
-            return userDao.get(login).get();
-        } else {
-            throw new UserNotFoundException(login);
-        }
-    }
-
-    
-
+    @Operation(summary = "Créer un utilisateur", 
+                description = "Créer un nouveau utilisateur dans la liste des utilisateurs",
+                tags = {"groupes"},
+                operationId = "Users",
+                responses = {
+                    @ApiResponse(responseCode = "201", description = "Utilisateur créer"),
+                    @ApiResponse(responseCode = "400", description = "Format de donnée non respecter")
+                    })
     @PostMapping(path = "/users", consumes = { MediaType.APPLICATION_FORM_URLENCODED })
-    public ResponseEntity<Void> users(@RequestParam("login") String login, @RequestParam("password") String password) throws UserCredentialsException {
+    public ResponseEntity<Void> users(@RequestParam("login") @Parameter(description = "The user name that needs to be created", required = true) String login, @RequestParam("password")  @Parameter(description = "The user password", required = true) String password) throws UserCredentialsException {
         if (!login.equals("") && !password.equals("")){
             userDao.save(new User(login, password));
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -78,10 +91,18 @@ public class apiController {
             throw new UserCredentialsException();
         }
     }
-    
+
 
     @PostMapping(path = "/users", consumes = { MediaType.APPLICATION_JSON })
-    public ResponseEntity<Void> usersJson(@RequestBody String json) {
+    @Operation(summary = "Créer un utilisateur", 
+                description = "Créer un nouveau utilisateur dans la liste des utilisateurs",
+                tags = {"groupes"},
+                operationId = "UsersJson",
+                responses = {
+                    @ApiResponse(responseCode = "201", description = "Utilisateur créer"),
+                    @ApiResponse(responseCode = "400", description = "Format de donnée non respecter")
+                    })
+    public ResponseEntity<Void> usersJson(@RequestBody(required = true) String json) {
         User user = new User();
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -97,25 +118,66 @@ public class apiController {
         }
     }
 
+
+    
+    @GetMapping(path = "/users/{login}", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @Operation(summary = "Retrouver un utilisateur", 
+                description = "Renvoie une representation d'un User",
+                tags = {"groupes"},
+                operationId = "getUsers",
+                responses = {
+                    @ApiResponse(responseCode = "200", description = "Succesfull operation" , content = {@Content(mediaType = "application/json"), @Content(mediaType = "application/xml")}),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouver")
+                    })
+    public User getUser(@Parameter(description = "Nom du l'utilisateur", required = true) @PathVariable String login) throws UserNotFoundException {
+        if (userDao.get(login).isPresent()) {
+            return userDao.get(login).get();
+        } else {
+            throw new UserNotFoundException(login);
+        }
+    }
+
+    
+
+    
+
+    @Operation(summary = "Mettre à jour ou crée un utilisateur", 
+                description = "Mets à jour l'utilisateur dont le nom est en parametre s'il existe déja ou le créer sinon",
+                tags = {"groupes"},
+                operationId = "PutUser",
+                responses = {
+                    @ApiResponse(responseCode = "204", description = "Utilisateur correctement créer ou modifier"),
+                    @ApiResponse(responseCode = "400", description = "Pas de parametre accceptable dans la requete  ")
+                    })
     @PutMapping(path = "/user/{loginn}", consumes = {MediaType.APPLICATION_FORM_URLENCODED})
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
     public ResponseEntity<Void> putUser(@RequestParam String login, @RequestParam String password, @PathVariable String loginn)
-            throws UserNotFoundException {
+            throws UserNotFoundException, UserCredentialsException {
         String[] params = new String [2];
         params[0] = login;
         params[1] = password;
         if (userDao.get(loginn).isPresent()) {
             userDao.update(userDao.get(loginn).get(), params);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }else {
             if (!login.equals("") && !password.equals("")){
                 userDao.save(new User(login, password));
-                return new ResponseEntity<>(HttpStatus.CREATED);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }else {
-                throw new UserNotFoundException(login);
+                throw new UserCredentialsException();
             }  
         }
     }
 
+
+    /*@Operation(summary = "Mettre à jour ou crée un utilisateur", 
+                description = "Mets à jour l'utilisateur dont le nom est en parametre s'il existe déja ou le créer sinon",
+                tags = {"groupes"},
+                operationId = "PutUser",
+                responses = {
+                    @ApiResponse(responseCode = "204", description = "Utilisateur correctement créer ou modifier"),
+                    @ApiResponse(responseCode = "400", description = "Pas de parametre acceptable dans la requete")
+                    })
     @PutMapping(path = "/user/{login}", consumes = {MediaType.APPLICATION_JSON})
     public ResponseEntity<Void> putUserJson(@PathVariable String login ,@RequestBody String json) {
         User user = new User();
@@ -123,7 +185,7 @@ public class apiController {
         try {
             user = mapper.readValue(json, User.class);
         }catch (JsonMappingException e ){
-            e.printStackTrace();
+            e.printStackTrace();    
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (JsonProcessingException e){
             e.printStackTrace();
@@ -131,21 +193,32 @@ public class apiController {
         }
         if (userDao.get(login).isPresent()){
             userDao.delete(userDao.get(login).get());
+            userDao.save(user);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else {
+
+            userDao.save(user);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        userDao.save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
+    }*/
 
-
+  
+    @Operation(summary = "Supprimer un utilisateur", 
+                description = "Supprimer l'utilisateur dont le nom est en parametre ",
+                tags = {"groupes"},
+                operationId = "DeleteUser",
+                responses = {
+                    @ApiResponse(responseCode = "204", description = "Utilisateur correctement créer ou modifier"),
+                    @ApiResponse(responseCode = "404", description = "Utilisateur non trouver")
+                    })
     @DeleteMapping("/user/{login}")
     public ResponseEntity<Void> deleteUser(@PathVariable String login){
         if (userDao.get(login).isPresent()) {
             userDao.delete(userDao.get(login).get());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }else {
             return ResponseEntity.notFound().build();   
         }
     }
-
 
 }

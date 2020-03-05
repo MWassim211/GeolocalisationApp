@@ -21,7 +21,7 @@ import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 
 
-@Controller
+@RestController
 public class OperationController {
 
     // TODO récupérer le DAO...
@@ -40,7 +40,6 @@ public class OperationController {
      */
 
   
-  @RequestMapping(path = "/testme", method = RequestMethod.GET)
     @PostMapping("/login")
     @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
     public ResponseEntity<String> login(@RequestParam("login") String login, @RequestParam("password") String password,@RequestHeader("Origin") String origin) {
