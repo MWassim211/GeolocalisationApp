@@ -54,6 +54,8 @@
 			success: function(data, textStatus, request){
                 sessionStorage.setItem("token",request.getResponseHeader('Authentication'));
                 localStorage.setItem("login",login);
+                console.log("yes succes");
+                window.location = "https://www.google.com";
 			},
 			error:function(request, status, error){ 
                 alert(error);

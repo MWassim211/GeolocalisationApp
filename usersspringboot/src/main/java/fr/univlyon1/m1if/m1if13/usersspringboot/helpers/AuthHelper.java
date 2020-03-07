@@ -29,5 +29,11 @@ public class AuthHelper {
                 .withExpiresAt(new Date(System.currentTimeMillis() + 86400 * 1000)).sign(ALGORITHM);
     }
 
+    public static String logoutUser(String token) {
+        Map<String, Claim> claims = verifyToken(token);
+        String userConnected = claims.get("login").asString();
+        return userConnected;
+    }
+
 
 }

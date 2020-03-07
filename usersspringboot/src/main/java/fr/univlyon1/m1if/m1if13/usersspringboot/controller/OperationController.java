@@ -21,10 +21,9 @@ import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 
 
-@RestController
+@Controller
 public class OperationController {
 
-    // TODO récupérer le DAO...
     @Autowired
     UserDao userDao;
 
@@ -52,37 +51,26 @@ public class OperationController {
                 HttpHeaders headers = new HttpHeaders();
                 headers.add("Authentication", AuthHelper.createToken(login,origin));
                 headers.add("Access-Control-Expose-Headers","Authentication");
-                //return ResponseEntity.ok().header(headers).build();
                 return new ResponseEntity<>(headers, HttpStatus.OK);
             }catch(Exception e) {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         }else{
-            //throw new RuntimeException();
-            //System.out.println("errreur");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-
-    /*@GetMapping("/login")
-    public ResponseEntity<String> login(@RequestParam("login") String login, @RequestParam("password") String password, @RequestHeader("Origin") String origin) {
-        HashSet<String> allUsers = (HashSet<String>) userDao.getAll();
-        if (allUsers.contains(login)){
-            return ResponseEntity.ok().header("Authentication", AuthHelper.createToken(login))
-            .body("Custom header set");
-        }else{
-            return ResponseEntity.ok().header("Authentication", AuthHelper.createToken(login))
-            .body("Custom header set");
-        }
-        
-    }*/
 
     /**
      * Réalise la déconnexion
      */
-    @PostMapping("/logout")
-    // TODO
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<Void> logout(@RequestParam("token") String token){
+        String logoutUser = AuthHelper.logoutUser(token);
+        System.out.println("user : " + logoutUser);
+        userDao.get(logoutUser).get().disconnect();
+        return ResponseEntity.noContent().build();    
+    }
 
     /**
      * Méthode destinée au serveur Node pour valider l'authentification d'un utilisateur.
@@ -92,18 +80,18 @@ public class OperationController {
      */
 
     @GetMapping("/authenticate")
-    public ResponseEntity<String> authenticate(@RequestParam("token") String token, @RequestParam("origin") String origin) {
-        System.out.println("auto");
-        HashMap<String, Claim> claims = (HashMap<String, Claim>) AuthHelper.verifyToken(token);
-        if(claims.get("Origin").toString().equals(origin)){
-            //return new ResponseEntity<>(HttpStatus.OK);
-        throw new RuntimeException();
+    public ResponseEntity<Void> authenticate(@RequestParam("token") String token, @RequestParam("origin") String origin) {
+        HashMap<String, Claim> claims = (HashMap<String, Claim>) AuthHelper.verifyToken(token); 
+        String userlogin = claims.get("login").asString();
+        if (!userDao.get(userlogin).isPresent()){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } 
+        User userAuth = userDao.get(userlogin).get();
+        if(claims.get("Origin").asString().equals(origin) && userAuth.isConnected()){
+            return ResponseEntity.noContent().build();
         }else{
-            //return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-            System.out.println("slkflsdf");
-            throw new RuntimeException();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        
     }
 
     
