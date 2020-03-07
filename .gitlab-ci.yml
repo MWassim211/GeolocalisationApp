@@ -53,10 +53,10 @@ cache:
 
 build: 
   script : 
-    sh ./setup-mvn-proxy.sh
-    mvn package
-    echo 'HEllo World'
-    ls
+    - sh ./setup-mvn-proxy.sh
+    - mvn package
+    - echo 'Hello World'
+    - ls
 
     
 
