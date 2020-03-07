@@ -54,6 +54,7 @@ cache:
 build: 
   script : 
     - sh ./setup-mvn-proxy.sh
+    - cd usersspringboot/
     - mvn package
     - echo 'Hello World'
     - ls
