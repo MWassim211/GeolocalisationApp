@@ -51,6 +51,10 @@ cache:
     - .m2/repository
 
 
+stages:
+  - build
+  - test
+
 build: 
   script : 
     - sh ./setup-mvn-proxy.sh
