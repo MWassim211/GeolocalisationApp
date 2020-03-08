@@ -67,14 +67,7 @@ build:
 
 test:
   script : 
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - cd ..
-    - ls
-    - ssh -o StrictHostKeyChecking=no etudiant@192.168.75.26
+    - ssh -o StrictHostKeyChecking=no etudiant@192.168.75.26 "ls"
     - ls
     - java -jar usersspringboot-0.0.1-SNAPSHOT.jar
     - sleep 10
