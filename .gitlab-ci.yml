@@ -67,7 +67,7 @@ build:
 
 test:
   script : 
-    - ls
+    - ssh etudiant@192.168.75.26
     - cd usersspringboot/
     - ls
     - java -jar usersspringboot-0.0.1-SNAPSHOT.jar
