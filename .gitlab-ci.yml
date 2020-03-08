@@ -62,11 +62,12 @@ build:
     - mvn package
     - echo 'Hello World'
     - ls
-    - scp -o StrictHostKeyChecking=no target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:~/
+    - scp -o StrictHostKeyChecking=no target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:/home/etudiant
     
 
 test:
   script : 
+    - ls
     - ssh -o StrictHostKeyChecking=no etudiant@192.168.75.26
     - ls
     - java -jar usersspringboot-0.0.1-SNAPSHOT.jar
