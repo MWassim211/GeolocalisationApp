@@ -1,12 +1,12 @@
 package fr.univlyon1.m1if.m1if13.usersspringboot.controller;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
+
 
 import com.auth0.jwt.interfaces.Claim;
+//import com.google.common.net.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import fr.univlyon1.m1if.m1if13.usersspringboot.dao.UserDao;
 import fr.univlyon1.m1if.m1if13.usersspringboot.helpers.AuthHelper;
 import fr.univlyon1.m1if.m1if13.usersspringboot.model.User;
-import io.swagger.v3.oas.annotations.Operation;
 
 
+@CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
 @Controller
 public class OperationController {
 
@@ -64,13 +64,14 @@ public class OperationController {
      * Réalise la déconnexion
      */
 
+    @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@RequestParam("token") String token){
+    public ResponseEntity<String> logout(@RequestBody String token){
         String logoutUser = AuthHelper.logoutUser(token);
-        System.out.println("user : " + logoutUser);
         userDao.get(logoutUser).get().disconnect();
         return ResponseEntity.noContent().build();    
     }
+
 
     /**
      * Méthode destinée au serveur Node pour valider l'authentification d'un utilisateur.
@@ -80,8 +81,9 @@ public class OperationController {
      */
 
     @GetMapping("/authenticate")
+    @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
     public ResponseEntity<Void> authenticate(@RequestParam("token") String token, @RequestParam("origin") String origin) {
-        HashMap<String, Claim> claims = (HashMap<String, Claim>) AuthHelper.verifyToken(token); 
+        Map<String, Claim> claims =  AuthHelper.verifyToken(token); 
         String userlogin = claims.get("login").asString();
         if (!userDao.get(userlogin).isPresent()){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

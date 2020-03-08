@@ -28,7 +28,12 @@
                                 <input type="password" name="password" id="password" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" id =" subBtn" value="submit">
+                                <label for="Origin" class="text-info">Origin:</label><br>
+                                <input type="text" name="Origin" id="Origin" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="token" class="text-info">token:</label><br>
+                                <input type="text" name="token" id="token" class="form-control">
                             </div>
                         </form>
                     </div>
@@ -36,34 +41,25 @@
             </div>
         </div>
     </div>
-    <script>
-        $("form#login-form").on("submit", function() {
-    var login = $("#login").val();
-    var password = $("#password").val();
-	
-	if(login == "" || password == "") {
-		alert("Tous les champs doivent êtres remplis");
-	}else{
-		$.ajax({
-			url: "http://localhost:8080/login",
-			type: "post",
-			data: {login: login, password: password},
-			beforesend: function(){
-				alert("loading");
-			},
-			success: function(data, textStatus, request){
-                sessionStorage.setItem("token",request.getResponseHeader('Authentication'));
-                localStorage.setItem("login",login);
-                console.log("yes succes");
-                window.location = "https://www.google.com";
-			},
-			error:function(request, status, error){ 
-                alert(error);
-			}   
-		});
-	}
-	return false;
-});
+    <hr color="black">
+    <div class="container">
+        <h1>Launch Tests</h1>
+        <div class="container">
+            <h2>User Controller</h2>
+                <ul>
+                    <li>Get user by login : <button id="getuserbtn" class="btn btn-info btn-md">Test</button>(Required file: Login)</li>
+                </ul>
+        </div>
+        <div class="container">
+            <h2>Operation Controller</h2>
+            <ul>
+                <li>Login (POST) : <button id="loginbtn" class="btn btn-info btn-md">Test</button>(Required fields : login,password)</li><br>
+                <li>Logout (Delete) : <button id="logoutbtn" class="btn btn-info btn-md">Test</button>(Required fields : Token)</li><br>
+                <li>Authenticate (GET) : <button id="authbtn" class="btn btn-info btn-md">Test</button>(Required fields : login,token,origin)</li><br>
+            </ul>   
+        </div>
+    </div>
+        <script src="script.js">  
     </script>
 </body>
 </html>

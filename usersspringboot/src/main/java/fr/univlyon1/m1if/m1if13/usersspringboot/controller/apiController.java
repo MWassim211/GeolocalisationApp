@@ -55,7 +55,7 @@ public class apiController {
     UserDao userDao;
 
 
-    @GetMapping(path = "/users", produces = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    @GetMapping(path = "/users", produces = {MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Operation(summary = "Rècupérer la liste des utilisateurs", 
                 description = "Renvoie les logins des utilisateurs",
                 tags = {"groupes"},
@@ -74,24 +74,7 @@ public class apiController {
         return model;
     }
 
-    @Operation(summary = "Créer un utilisateur", 
-                description = "Créer un nouveau utilisateur dans la liste des utilisateurs",
-                tags = {"groupes"},
-                operationId = "Users",
-                responses = {
-                    @ApiResponse(responseCode = "201", description = "Utilisateur créer"),
-                    @ApiResponse(responseCode = "400", description = "Format de donnée non respecter")
-                    })
-    @PostMapping(path = "/users", consumes = { MediaType.APPLICATION_FORM_URLENCODED })
-    public ResponseEntity<Void> users(@RequestParam("login") @Parameter(description = "The user name that needs to be created", required = true) String login, @RequestParam("password")  @Parameter(description = "The user password", required = true) String password) throws UserCredentialsException {
-        if (!login.equals("") && !password.equals("")){
-            userDao.save(new User(login, password));
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }else {
-            throw new UserCredentialsException();
-        }
-    }
-
+  
 
     @PostMapping(path = "/users", consumes = { MediaType.APPLICATION_JSON })
     @Operation(summary = "Créer un utilisateur", 
@@ -117,6 +100,26 @@ public class apiController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+      @Operation(summary = "Créer un utilisateur", 
+                description = "Créer un nouveau utilisateur dans la liste des utilisateurs",
+                tags = {"groupes"},
+                operationId = "Users",
+                responses = {
+                    @ApiResponse(responseCode = "201", description = "Utilisateur créer"),
+                    @ApiResponse(responseCode = "400", description = "Format de donnée non respecter")
+                    })
+    @Consumes({ MediaType.APPLICATION_FORM_URLENCODED })
+    @PostMapping(path = "/users")
+    public ResponseEntity<Void> users(@RequestParam("login") @Parameter(description = "The user name that needs to be created", required = true) String login, @RequestParam("password")  @Parameter(description = "The user password", required = true) String password) throws UserCredentialsException {
+        if (!login.equals("") && !password.equals("")){
+            userDao.save(new User(login, password));
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        }else {
+            throw new UserCredentialsException();
+        }
+    }
+
 
 
     
