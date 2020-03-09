@@ -2,19 +2,26 @@ openapi: 3.0.1
 info:
   title: TP1 & TP2 Docs
   description: 'Description de l''API: Api controller && Opearation Controller qui
-    gere le coté ressources utilisateurs (login,logout,authenticate,users...)'
+    gere le cotÃ© ressources utilisateurs (login,logout,authenticate,users...)'
   version: 1.0.0
 servers:
 - url: http://localhost:8080
-  description: Generated server url
+  description: localhost
+  variables: {}
+- url: http://192.168.75.26
+  description: VM
+  variables: {}
+- url: https://192.168.75.26
+  description: VM secure
+  variables: {}
 paths:
   /login:
     post:
       tags:
       - Operation
-      summary: Procédure de login simple d'un utilisateur
+      summary: ProcÃ©dure de login simple d'un utilisateur
       description: Renvoie une ResponseEntity avec le JWT dans le header Authentication
-        si le login s'est bien passé, et le code de statut appropriés
+        si le login s'est bien passÃ©, et le code de statut appropriÃ©s
       operationId: login
       parameters:
       - name: login
@@ -46,8 +53,8 @@ paths:
     delete:
       tags:
       - Operation
-      summary: Deconexion de l'utilisateur connecté
-      description: Met le status de l'utilisateur en déconnecté
+      summary: Deconexion de l'utilisateur connectÃ©
+      description: Met le status de l'utilisateur en dÃ©connectÃ©
       operationId: logout
       requestBody:
         description: The token
@@ -71,7 +78,7 @@ paths:
       - Operation
       summary: validation de l'authentification d'un utilisateur
       description: Verifie le token et l'utilisateur correspondant au token est bien
-        connecté
+        connectÃ©
       operationId: authenticate
       parameters:
       - name: token
@@ -99,7 +106,7 @@ paths:
     get:
       tags:
       - groupes
-      summary: Rècupérer la liste des utilisateurs
+      summary: RÃ¨cupÃ©rer la liste des utilisateurs
       description: Renvoie les logins des utilisateurs
       operationId: users
       responses:
@@ -118,8 +125,8 @@ paths:
     post:
       tags:
       - groupes
-      summary: Créer un utilisateur
-      description: Créer un nouveau utilisateur dans la liste des utilisateurs
+      summary: CrÃ©er un utilisateur
+      description: CrÃ©er un nouveau utilisateur dans la liste des utilisateurs
       operationId: Users_1
       parameters:
       - name: login
@@ -147,9 +154,9 @@ paths:
               schema:
                 type: string
         "201":
-          description: Utilisateur créer
+          description: Utilisateur crÃ©er
         "400":
-          description: Format de donnée non respecter
+          description: Format de donnÃ©e non respecter
   /users/{login}:
     get:
       tags:
@@ -183,9 +190,9 @@ paths:
     put:
       tags:
       - groupes
-      summary: Mettre à jour ou crée un utilisateur
-      description: Mets à jour l'utilisateur dont le nom est en parametre s'il existe
-        déja ou le créer sinon
+      summary: Mettre Ã  jour ou crÃ©e un utilisateur
+      description: Mets Ã  jour l'utilisateur dont le nom est en parametre s'il existe
+        dÃ©ja ou le crÃ©er sinon
       operationId: PutUser
       parameters:
       - name: login
@@ -211,16 +218,16 @@ paths:
               schema:
                 type: string
         "204":
-          description: Utilisateur correctement créer ou modifier
+          description: Utilisateur correctement crÃ©er ou modifier
         "400":
           description: 'Pas de parametre accceptable dans la requete  '
   /user/{login}:
     put:
       tags:
       - groupes
-      summary: Mettre à jour ou crée un utilisateur
-      description: Mets à jour l'utilisateur dont le nom est en parametre s'il existe
-        déja ou le créer sinon
+      summary: Mettre Ã  jour ou crÃ©e un utilisateur
+      description: Mets Ã  jour l'utilisateur dont le nom est en parametre s'il existe
+        dÃ©ja ou le crÃ©er sinon
       operationId: PutUser_1
       parameters:
       - name: login
@@ -241,7 +248,7 @@ paths:
               schema:
                 type: string
         "204":
-          description: Utilisateur correctement créer ou modifier
+          description: Utilisateur correctement crÃ©er ou modifier
         "400":
           description: Pas de parametre acceptable dans la requete
     delete:
@@ -260,60 +267,9 @@ paths:
         "404":
           description: Utilisateur non trouver
         "204":
-          description: Utilisateur correctement créer ou modifier
+          description: Utilisateur correctement crÃ©er ou modifier
   /swagger-resources/configuration/security:
     get:
-      tags:
-      - api-resource-controller
-      operationId: securityConfiguration
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/SecurityConfiguration'
-    put:
-      tags:
-      - api-resource-controller
-      operationId: securityConfiguration_2
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/SecurityConfiguration'
-    post:
-      tags:
-      - api-resource-controller
-      operationId: securityConfiguration_6
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/SecurityConfiguration'
-    delete:
       tags:
       - api-resource-controller
       operationId: securityConfiguration_5
@@ -330,10 +286,10 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/SecurityConfiguration'
-    options:
+    put:
       tags:
       - api-resource-controller
-      operationId: securityConfiguration_1
+      operationId: securityConfiguration_6
       responses:
         "404":
           description: default response
@@ -347,24 +303,7 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/SecurityConfiguration'
-    head:
-      tags:
-      - api-resource-controller
-      operationId: securityConfiguration_4
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/SecurityConfiguration'
-    patch:
+    post:
       tags:
       - api-resource-controller
       operationId: securityConfiguration_3
@@ -381,65 +320,76 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/SecurityConfiguration'
+    delete:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_1
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    options:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_4
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    head:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_2
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    patch:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
   /swagger-resources:
     get:
-      tags:
-      - api-resource-controller
-      operationId: swaggerResources
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SwaggerResource'
-    put:
-      tags:
-      - api-resource-controller
-      operationId: swaggerResources_2
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SwaggerResource'
-    post:
-      tags:
-      - api-resource-controller
-      operationId: swaggerResources_6
-      responses:
-        "404":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: string
-        "200":
-          description: default response
-          content:
-            '*/*':
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/SwaggerResource'
-    delete:
       tags:
       - api-resource-controller
       operationId: swaggerResources_5
@@ -458,7 +408,45 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SwaggerResource'
-    options:
+    put:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_6
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    post:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_3
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    delete:
       tags:
       - api-resource-controller
       operationId: swaggerResources_1
@@ -477,7 +465,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SwaggerResource'
-    head:
+    options:
       tags:
       - api-resource-controller
       operationId: swaggerResources_4
@@ -496,10 +484,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/SwaggerResource'
+    head:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_2
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
     patch:
       tags:
       - api-resource-controller
-      operationId: swaggerResources_3
+      operationId: swaggerResources
       responses:
         "404":
           description: default response
@@ -519,7 +526,7 @@ paths:
     get:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration
+      operationId: uiConfiguration_5
       responses:
         "404":
           description: default response
@@ -536,7 +543,7 @@ paths:
     put:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_2
+      operationId: uiConfiguration_6
       responses:
         "404":
           description: default response
@@ -553,7 +560,7 @@ paths:
     post:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_6
+      operationId: uiConfiguration_3
       responses:
         "404":
           description: default response
@@ -570,7 +577,7 @@ paths:
     delete:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_5
+      operationId: uiConfiguration_1
       responses:
         "404":
           description: default response
@@ -587,7 +594,7 @@ paths:
     options:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_1
+      operationId: uiConfiguration_4
       responses:
         "404":
           description: default response
@@ -604,7 +611,7 @@ paths:
     head:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_4
+      operationId: uiConfiguration_2
       responses:
         "404":
           description: default response
@@ -621,7 +628,7 @@ paths:
     patch:
       tags:
       - api-resource-controller
-      operationId: uiConfiguration_3
+      operationId: uiConfiguration
       responses:
         "404":
           description: default response

@@ -24,13 +24,19 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.*;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.servers.Server;
 
 @OpenAPIDefinition(
             info = @Info(
                     title = "TP1 & TP2 Docs",
                     version = "1.0.0",
                     description = "Description de l'API: Api controller && Opearation Controller qui gere le coté ressources utilisateurs (login,logout,authenticate,users...)"
-            ))
+            ),
+            servers = {
+                @Server(description="localhost", url="http://localhost:8080"),
+                @Server(description="VM", url="http://192.168.75.26"),
+                @Server(description="VM secure", url="https://192.168.75.26")
+            } )
 @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
 @RestController
 public class OperationController {
