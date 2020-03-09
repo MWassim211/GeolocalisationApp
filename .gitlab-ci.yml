@@ -51,6 +51,10 @@ cache:
     - .m2/repository
   key : "$CI_JOB_NAME"
 
+  nginx :
+    stage : build
+    script : 
+      - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 "systemctl status nginx"
 
 build: 
   stage : build
