@@ -9,6 +9,7 @@ TP1 & TP2
  - lien vers le fichier yaml sur le dépot contenant la documentation OpenApi générée :
 
  - lien vers le Swagger généré par Spring : 
+    http://192.168.75.26:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
  - le  répertoire users contient le code de la partie Spring Boot.
 

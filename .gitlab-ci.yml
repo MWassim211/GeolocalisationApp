@@ -60,7 +60,7 @@ build:
   stage : build
   script : 
     - ./setup-mvn-proxy.sh
-    - cd usersspringboot/
+    - cd users/
     - mvn package
     - scp -o StrictHostKeyChecking=no target/usersspringboot-0.0.1-SNAPSHOT.jar etudiant@192.168.75.26:/home/etudiant
     
