@@ -1,0 +1,739 @@
+openapi: 3.0.1
+info:
+  title: TP1 & TP2 Docs
+  description: 'Description de l''API: Api controller && Opearation Controller qui
+    gere le coté ressources utilisateurs (login,logout,authenticate,users...)'
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /login:
+    post:
+      tags:
+      - Operation
+      summary: Procédure de login simple d'un utilisateur
+      description: Renvoie une ResponseEntity avec le JWT dans le header Authentication
+        si le login s'est bien passé, et le code de statut appropriés
+      operationId: login
+      parameters:
+      - name: login
+        in: query
+        description: The username
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: The user password
+        required: true
+        schema:
+          type: string
+      - name: Origin
+        in: header
+        description: Origin of the request
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Unauthorized user
+        "200":
+          description: Succesfull operation
+        "401":
+          description: Unauthorized user
+  /logout:
+    delete:
+      tags:
+      - Operation
+      summary: Deconexion de l'utilisateur connecté
+      description: Met le status de l'utilisateur en déconnecté
+      operationId: logout
+      requestBody:
+        description: The token
+        content:
+          application/json:
+            schema:
+              type: string
+        required: true
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "204":
+          description: logout done succesfully
+  /authenticate:
+    get:
+      tags:
+      - Operation
+      summary: validation de l'authentification d'un utilisateur
+      description: Verifie le token et l'utilisateur correspondant au token est bien
+        connecté
+      operationId: authenticate
+      parameters:
+      - name: token
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: origin
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "204":
+          description: Authentication done successfuly
+        "401":
+          description: Bad request
+  /users:
+    get:
+      tags:
+      - groupes
+      summary: Rècupérer la liste des utilisateurs
+      description: Renvoie les logins des utilisateurs
+      operationId: users
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: Succesfull operation
+          content:
+            application/json: {}
+            application/xml: {}
+            text/html: {}
+    post:
+      tags:
+      - groupes
+      summary: Créer un utilisateur
+      description: Créer un nouveau utilisateur dans la liste des utilisateurs
+      operationId: Users_1
+      parameters:
+      - name: login
+        in: query
+        description: The user name that needs to be created
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: The user password
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "201":
+          description: Utilisateur créer
+        "400":
+          description: Format de donnée non respecter
+  /users/{login}:
+    get:
+      tags:
+      - groupes
+      summary: Retrouver un utilisateur
+      description: Renvoie une representation d'un User
+      operationId: getUsers
+      parameters:
+      - name: login
+        in: path
+        description: Nom du l'utilisateur
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Utilisateur non trouver
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        "200":
+          description: Succesfull operation
+          content:
+            application/json: {}
+            application/xml: {}
+  /user/{loginn}:
+    put:
+      tags:
+      - groupes
+      summary: Mettre à jour ou crée un utilisateur
+      description: Mets à jour l'utilisateur dont le nom est en parametre s'il existe
+        déja ou le créer sinon
+      operationId: PutUser
+      parameters:
+      - name: login
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: loginn
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "204":
+          description: Utilisateur correctement créer ou modifier
+        "400":
+          description: 'Pas de parametre accceptable dans la requete  '
+  /user/{login}:
+    put:
+      tags:
+      - groupes
+      summary: Mettre à jour ou crée un utilisateur
+      description: Mets à jour l'utilisateur dont le nom est en parametre s'il existe
+        déja ou le créer sinon
+      operationId: PutUser_1
+      parameters:
+      - name: login
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "204":
+          description: Utilisateur correctement créer ou modifier
+        "400":
+          description: Pas de parametre acceptable dans la requete
+    delete:
+      tags:
+      - groupes
+      summary: Supprimer un utilisateur
+      description: 'Supprimer l''utilisateur dont le nom est en parametre '
+      operationId: DeleteUser
+      parameters:
+      - name: login
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "404":
+          description: Utilisateur non trouver
+        "204":
+          description: Utilisateur correctement créer ou modifier
+  /swagger-resources/configuration/security:
+    get:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    put:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_2
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    post:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_6
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    delete:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_5
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    options:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_1
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    head:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_4
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+    patch:
+      tags:
+      - api-resource-controller
+      operationId: securityConfiguration_3
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SecurityConfiguration'
+  /swagger-resources:
+    get:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    put:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_2
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    post:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_6
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    delete:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_5
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    options:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_1
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    head:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_4
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+    patch:
+      tags:
+      - api-resource-controller
+      operationId: swaggerResources_3
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SwaggerResource'
+  /swagger-resources/configuration/ui:
+    get:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    put:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_2
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    post:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_6
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    delete:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_5
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    options:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_1
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    head:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_4
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+    patch:
+      tags:
+      - api-resource-controller
+      operationId: uiConfiguration_3
+      responses:
+        "404":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                type: string
+        "200":
+          description: default response
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UiConfiguration'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        login:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+        connected:
+          type: boolean
+    SecurityConfiguration:
+      type: object
+      properties:
+        apiKey:
+          type: string
+        apiKeyVehicle:
+          type: string
+        apiKeyName:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        realm:
+          type: string
+        appName:
+          type: string
+        scopeSeparator:
+          type: string
+        additionalQueryStringParams:
+          type: object
+          additionalProperties:
+            type: object
+        useBasicAuthenticationWithAccessCodeGrant:
+          type: boolean
+    SwaggerResource:
+      type: object
+      properties:
+        name:
+          type: string
+        url:
+          type: string
+        swaggerVersion:
+          type: string
+        location:
+          type: string
+    UiConfiguration:
+      type: object
+      properties:
+        deepLinking:
+          type: boolean
+        displayOperationId:
+          type: boolean
+        defaultModelsExpandDepth:
+          type: integer
+          format: int32
+        defaultModelExpandDepth:
+          type: integer
+          format: int32
+        defaultModelRendering:
+          type: string
+          enum:
+          - EXAMPLE
+          - MODEL
+        displayRequestDuration:
+          type: boolean
+        docExpansion:
+          type: string
+          enum:
+          - NONE
+          - LIST
+          - FULL
+        filter:
+          type: object
+        maxDisplayedTags:
+          type: integer
+          format: int32
+        operationsSorter:
+          type: string
+          enum:
+          - ALPHA
+          - METHOD
+        showExtensions:
+          type: boolean
+        tagsSorter:
+          type: string
+          enum:
+          - ALPHA
+        validatorUrl:
+          type: string
+        apisSorter:
+          type: string
+        jsonEditor:
+          type: boolean
+        showRequestHeaders:
+          type: boolean
+        supportedSubmitMethods:
+          type: array
+          items:
+            type: string
