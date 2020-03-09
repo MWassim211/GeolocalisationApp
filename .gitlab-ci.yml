@@ -74,10 +74,8 @@ curl:
 deploy:
   stage : deploy
   script : 
-    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 "ls && java -jar usersspringboot-0.0.1-SNAPSHOT.jar &"
-    - sleep 10
-    - curl -o /dev/null --silent --head --write-out '%{http_code}\n' http://192.168.75.26 200
-    - echo 'passed'    
+    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 "java -jar usersspringboot-0.0.1-SNAPSHOT.jar &"
+    
 
     
 
