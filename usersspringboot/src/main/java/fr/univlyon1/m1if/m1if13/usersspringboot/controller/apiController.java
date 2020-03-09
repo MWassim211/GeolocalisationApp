@@ -47,7 +47,7 @@ import io.swagger.v3.oas.annotations.parameters.*;
                     version = "0.0",
                     description = "Api operations"
             ))
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
 @RestController
 public class apiController {
 
