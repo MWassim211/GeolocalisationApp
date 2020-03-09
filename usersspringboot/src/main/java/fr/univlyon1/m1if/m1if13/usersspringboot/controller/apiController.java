@@ -33,19 +33,15 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.*;
-import io.swagger.*;
-import io.swagger.v3.oas.annotations.callbacks.*;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.parameters.*;
 
 
 @OpenAPIDefinition(
             info = @Info(
-                    title = "TP1 & TP2",
-                    version = "0.0",
-                    description = "Api operations"
+                    title = "TP1 & TP2 Docs",
+                    version = "1.0.0",
+                    description = "Description de l'API: Api controller && Opearation Controller qui gere le coté ressources utilisateurs (login,logout,authenticate,users...)"
             ))
 @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
 @RestController
@@ -101,7 +97,7 @@ public class apiController {
         }
     }
 
-      @Operation(summary = "Créer un utilisateur", 
+    @Operation(summary = "Créer un utilisateur", 
                 description = "Créer un nouveau utilisateur dans la liste des utilisateurs",
                 tags = {"groupes"},
                 operationId = "Users",
@@ -142,8 +138,6 @@ public class apiController {
 
     
 
-    
-
     @Operation(summary = "Mettre à jour ou crée un utilisateur", 
                 description = "Mets à jour l'utilisateur dont le nom est en parametre s'il existe déja ou le créer sinon",
                 tags = {"groupes"},
@@ -173,7 +167,7 @@ public class apiController {
     }
 
 
-    /*@Operation(summary = "Mettre à jour ou crée un utilisateur", 
+    @Operation(summary = "Mettre à jour ou crée un utilisateur", 
                 description = "Mets à jour l'utilisateur dont le nom est en parametre s'il existe déja ou le créer sinon",
                 tags = {"groupes"},
                 operationId = "PutUser",
@@ -203,7 +197,7 @@ public class apiController {
             userDao.save(user);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-    }*/
+    }
 
   
     @Operation(summary = "Supprimer un utilisateur", 
