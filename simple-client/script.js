@@ -5,7 +5,7 @@ $("#getuserbtn").on("click",function(){
 		alert("Login field is required for this request :) ");
     }else {
         $.ajax({
-			url: "http://localhost:8080/users/"+login,
+			url: "http://192.168.75.26:8080/users/"+login,
 			type: "get",
 			data: {login :login},
 			beforesend: function(){
@@ -31,7 +31,7 @@ $("#loginbtn").on("click",function(){
 		alert("Login and password fields are required for this request");
 	}else{
 		$.ajax({
-			url: "http://localhost:8080/login",
+			url: "http://192.168.75.26:8080/login",
 			type: "post",
 			data: {login: login, password: password},
 			beforesend: function(){
@@ -56,7 +56,7 @@ $("#logoutbtn").on("click",function(){
 		alert("Token field is required for this request");
 	}else{
 		$.ajax({
-			url: "http://localhost:8080/logout",
+			url: "http://192.168.75.26:8080/logout",
 			type: "delete",
 			data: tokenn,
 			beforesend: function(){
@@ -80,7 +80,7 @@ $("#authbtn").on("click",function(){
 		alert("Token and Origin fields are required for this request");
 	}else{
 		$.ajax({
-			url: "http://localhost:8080/authenticate",
+			url: "http://192.168.75.26:8080/authenticate",
 			type: "get",
 			data: {token : token, origin : origin},
 			beforesend: function(){
