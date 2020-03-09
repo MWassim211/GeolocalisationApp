@@ -10,12 +10,5 @@ public class ApiDocConfig  {
 	String packagesToscan[] = {"fr.univlyon1.m1if.m1if13.usersspringboot.controller"};
 	return GroupedOpenApi.builder().setGroup("users").packagesToScan(packagesToscan)
             .build();
-            
-            SwaggerConfiguration oasConfig = new SwaggerConfiguration()
-            .openAPI(oas)
-            .prettyPrint(true)
-            .filterClass("fully.qualified.SecurityFilter")
-            .resourcePackages(Stream.of("my.resources.package")
-                    .collect(Collectors.toSet()));
 }
 }
