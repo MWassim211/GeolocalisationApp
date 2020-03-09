@@ -7,11 +7,11 @@ Dans ces TPS , on a réaliser un serveur de gestion des utilisateurs et des toke
 TP1 & TP2
 
  - lien vers le fichier yaml sur le dépot contenant la documentation OpenApi générée :
-    https://forge.univ-lyon1.fr/p1808195/mif13-tp1/-/blob/master/api-docs.yaml
+    https://forge.univ-lyon1.fr/p1808195/mif13-tp1/-/blob/master/users-api.yaml
 
  - lien vers le Swagger généré par Spring : 
     http://192.168.75.26:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config
 
- - le  répertoire users contient le code de la partie Spring Boot.
+ - le répertoire users contient le code de la partie Spring Boot.
 
  - le répertoire simple-client contient le client.
