@@ -32,7 +32,7 @@ import io.swagger.v3.oas.annotations.media.Content;
                     description = "Description de l'API: Api controller && Opearation Controller qui gere le coté ressources utilisateurs (login,logout,authenticate,users...)"
             ))
 @CrossOrigin(origins = {"http://localhost:3000" , "http://localhost" , "http://192.168.75.26" , "https://192.168.75.26"})
-@Controller
+@RestController
 public class OperationController {
 
     @Autowired
