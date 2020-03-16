@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="limiter">
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table100">
+                        <table>
+                            <thead>
+                                <tr class="table100-head">
+                                    <th class="column1">User login</th>
+                                    <th class="column2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% users.forEach(function(users) {%>
+                                    <tr>
+                                        <td class="column1"><%= users %></td>
+                                        <td class="column2"><a href="users/<%=users%>">show</a></td>
+                                        <td class="column2"><a href="users/<%=users%>/update">modifier</a></td>
+                                        <td class="column2"><a href="users/<%=users%>">delete</a></td>
+                                    </tr>
+                                <% }) %>
+                                    </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
