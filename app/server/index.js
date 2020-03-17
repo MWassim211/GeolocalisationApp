@@ -6,12 +6,12 @@ const admin = require("./routes/admin");
 const methodOverride = require('method-override');
 const app = express();
 
-
+app.use(express.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({extended:true}));
 app.use("/api",api);
 app.use("/admin",admin);
 app.use('/static', express.static(path.join(__dirname, '/public')));
-  
+
 // EJS config
 //app.set("view","./views");
 app.set("view engine","ejs");
