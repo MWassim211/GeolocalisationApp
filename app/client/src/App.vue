@@ -2,10 +2,7 @@
   <div id="app">
     <Header />
     <Position ref="poref"/>
-   <section>
-        <h2 id="unique">Carte</h2>
-        <div id="map"></div>
-    </section>
+  <Carte />
   <button v-on:click="ready">tap</button>
   </div>
 </template>
@@ -14,8 +11,8 @@
 import Header from './components/Header.vue'
 import Position from './components/Position.vue'
 import Carte from './components/Carte.vue'
-import 'vue/dist/vue.esm.browser'
-import './assets/js/bundle'
+//import 'vue/dist/vue.esm.browser' included in Webpack
+//import './assets/js/bundle'
 
 
 export default {
@@ -27,11 +24,12 @@ export default {
   },
   methods : {
     ready() {
-      console.log(document.getElementById("unique"))
-      console.log(this.$refs.poref)
     }
     
-  }
+  },
+  mounted() {
+     import('./assets/js/bundle.js')
+  } 
 }
 </script>
 

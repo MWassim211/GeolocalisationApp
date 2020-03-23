@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h2>Carte</h2>
+        <h2 id="unique">Carte</h2>
         <div id="map"></div>
     </section>
 </template>

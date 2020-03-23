@@ -4,3 +4,4 @@ import './public/css/style.css';
 
 import './public/js/map';
 import './public/js/form';
+import 'vue/dist/vue.esm.browser'

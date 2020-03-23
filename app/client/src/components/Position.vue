@@ -1,6 +1,6 @@
 <template>
     <section>
-			<h2 ref="reff">Position</h2>
+			<h2 id="ref">Position</h2>
 			<form onsubmit="return updateMap();" class="pure-form pure-form-stacked">
 				<fieldset>
 					<label for="lat">Lattitude : </label> <input type="text" id="lat" name="lat" value="45.782">
