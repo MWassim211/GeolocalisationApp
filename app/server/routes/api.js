@@ -19,7 +19,7 @@ function authenticate(req) {
 
 router.get("/resources",(req,res)=>{
     authenticate(req)
-    .then(function (response) {
+    .then(function (response) { 
         // handle success 
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(  tab ));

@@ -10944,7 +10944,7 @@ return jQuery;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "4f0283c6ce28e888000e978e537a6a56.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8f2c4d11474275fbc1614b9098334eae.png");
 
 /***/ }),
 
@@ -10957,7 +10957,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a6137456ed160d7606981aa57c559898.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "416d91365b44e4b4f4777663e6f009f3.png");
 
 /***/ }),
 
@@ -10970,7 +10970,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2273e3d8ad9264b7daa5bdbf8e6b47f8.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2b3e1faf89f94a4835397e7a43b4f77d.png");
 
 /***/ }),
 
@@ -25484,7 +25484,7 @@ leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.tileLayer('https://api.tiles.mapb
 		id: 'mapbox.streets'
 	}).addTo(mymap);
 
-// Ajout d'un marker
+// Ajout d'un marker	
 leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.marker([45.78207, 4.86559]).addTo(mymap).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
 leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.Icon.Default.imagePath = '/lib/leaflet/dist/images/';
 
@@ -25501,4 +25501,4 @@ function updateMap() {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=bundle.js.map

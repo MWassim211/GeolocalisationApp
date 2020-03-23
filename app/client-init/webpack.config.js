@@ -6,9 +6,9 @@ module.exports = {
     mode : 'development',
     devtool : 'source-map',
     watch : true,
-    entry : './index.js',
+    entry : './app.js',
     output : {
-        path : path.resolve("src/assets/js/"),
+        path : path.resolve("./public/dist"),
         filename : 'bundle.js'
     },
     module: {   
