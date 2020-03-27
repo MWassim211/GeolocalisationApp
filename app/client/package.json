@@ -12,7 +12,8 @@
     "core-js": "^3.6.4",
     "jquery": "^3.4.1",
     "purecss": "^1.0.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vuetify": "^2.2.19"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",

@@ -27,9 +27,9 @@ export default {
     }
     
   },
-  mounted() {
-     import('./assets/js/bundle.js')
-  } 
+    mounted() {
+      import('./assets/js/bundle.js')
+    } 
 }
 </script>
 
