@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <Position ref="poref"/>
+    <Position />
   <Carte />
   <button v-on:click="ready">tap</button>
   </div>
@@ -11,6 +11,7 @@
 import Header from './components/Header.vue'
 import Position from './components/Position.vue'
 import Carte from './components/Carte.vue'
+
 //import 'vue/dist/vue.esm.browser' included in Webpack
 //import './assets/js/bundle'
 

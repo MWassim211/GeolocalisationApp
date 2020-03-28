@@ -7,6 +7,7 @@
 
 <script>
 import L from 'leaflet';
+import {mapstate, mapState} from 'vuex'
 
 export default {
     name : 'Carte',
@@ -15,8 +16,10 @@ export default {
             map : null,
             tileLayer : null,
             layers : []
-
         }
+    },
+    computed : {
+        ...mapState(['LatLon' , 'zoom'])
     },
     mounted() {
         this.initMap();
@@ -24,8 +27,10 @@ export default {
         //this.initLayers() 
         this.$root.$on("formsubmition", (datarecieved) => {
             console.log(datarecieved);
-            this.map.setView([datarecieved[0], datarecieved[1]], 15);
-            L.marker([datarecieved[0], datarecieved[1]]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
+            console.log(this.LatLon);
+            console.log('printed latlon');
+            this.map.setView([this.LatLon[0], this.LatLon[1]], this.zoom);
+            L.marker([this.LatLon[0], this.LatLon[1]]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
             console.log("okkkkk");  
         });
     },
