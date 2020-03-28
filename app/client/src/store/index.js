@@ -7,10 +7,9 @@ Vue.use(Vuex)
 let store = new Vuex.Store({
   state: {
     LatLon : [5,5],
-		zoom : 7
+    zoom : 7,
   },
   mutations: {
-    updateField,
     UPDATE (state,payload) {
       state.LatLon[payload.index] = payload.value;
     },
@@ -26,15 +25,9 @@ let store = new Vuex.Store({
       context.commit("UPDATE_ZOOM",value)
     },
     updateLatLonZoom (context,lat,lon,value) {
-      //context.commit('UPDATE_LAT',lat);
-      //context.commit('UPDATE_LON',lon);
-      //context.commit("UPDATE_ZOOM",value);
-    }
+    },
   },
   getters : {
-    getField,
-    LatLon  : state => state.LatLon,
-    zoom : state => state.zoom
   },
   modules: {
   },
