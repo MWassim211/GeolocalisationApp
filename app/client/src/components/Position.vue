@@ -20,6 +20,9 @@ export default {
 	computed : {
 		...mapState(['LatLon','zoom']),
 	},
+	mounted() {
+		import('../assets/js/bundle.js')
+	},
 	methods : {
 		...mapActions(['updateLatLonZoom']),
 		updateLat (event) {

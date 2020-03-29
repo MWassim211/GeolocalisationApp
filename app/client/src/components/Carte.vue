@@ -26,12 +26,8 @@ export default {
         
         //this.initLayers() 
         this.$root.$on("formsubmition", (datarecieved) => {
-            console.log(datarecieved);
-            console.log(this.LatLon);
-            console.log('printed latlon');
             this.map.setView([this.LatLon[0], this.LatLon[1]], this.zoom);
-            L.marker([this.LatLon[0], this.LatLon[1]]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
-            console.log("okkkkk");  
+            L.marker([this.LatLon[0], this.LatLon[1]]).addTo(this.map).bindPopup('You are here !').openPopup();
         });
     },
     methods : {
@@ -49,13 +45,24 @@ export default {
 		    id: 'mapbox.streets'
             });
             this.tileLayer.addTo(this.map);
-            L.marker([45.78207, 4.86559]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
-            console.log("init executed");
+            //L.marker([45.78207, 4.86559]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
+            //console.log("init executed");
         }
     }
 }
 </script>
 
-<style>
+<style scoped>
+#map {
+    text-align: center;
+    margin: 10;
+    position: center;
+    height: 900px;
+    width: 1500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 
 </style>

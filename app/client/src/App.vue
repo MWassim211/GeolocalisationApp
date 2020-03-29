@@ -1,36 +1,25 @@
 <template>
   <div id="app">
-    <Header />
-    <Position />
-  <Carte />
-  <button v-on:click="ready">tap</button>
+    <app-header/>
+    <router-view></router-view>
   </div>
 </template>
 
+
+
 <script>
 import Header from './components/Header.vue'
-import Position from './components/Position.vue'
-import Carte from './components/Carte.vue'
-
-//import 'vue/dist/vue.esm.browser' included in Webpack
-//import './assets/js/bundle'
-
 
 export default {
-  name: 'App',
   components: {
-    Header,
-    Position,
-    Carte
-  },
-  methods : {
-    ready() {
+        'app-header' : Header
+    },
+    data () {
+        return {
+        }
+    },
+    methods: {
     }
-    
-  },
-    mounted() {
-      import('./assets/js/bundle.js')
-    } 
 }
 </script>
 
@@ -41,6 +30,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
 }
 </style>
