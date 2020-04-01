@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Paramètres de jeu </title>
+        <%- include ("partials/head.ejs") %> 
+    </head>
+    <body>
+        <%- include ("partials/menu.ejs") %>
+        <div id="login-div">
+            <h3 class="text-center text-white pt-5">Paramètres de jeu :</h3>
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <form id="login-form" class="form" action="/admin/register" method="post">
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Durée de vie des utilisateurs infectés:</label><br>
+                                    <input type="text" name="DureVieUsrInf" id="DureVieUsrInf" class="form-control" placeholder="En Secondes">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Taille des clusters:</label><br>
+                                    <input type="text" name="clusterSize" id="clusterSize" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Nombre de pillules:</label><br>
+                                    <input type="text" name="nbpillules" id="nbPillules" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Nombre de Clusters:</label><br>
+                                    <input type="text" name="nbclusters" id="nbclusters" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Dure de vie de ses elements:</label><br>
+                                    <input type="text" name="DureVieElem" id="DureVieElem" class="form-control" placeholder="En Secondes">
+                                </div>
+                                <div class="form-group">
+                                    <label for="login" class="text-info">Périmètre de jeu :</label><br>
+                                    <input type="text" name="perimetre" id="perimetre" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="submit" class="btn btn-info btn-md" id =" subBtn" value="submit">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -2,9 +2,12 @@
 <html>
     <head>
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liste des utilisateurs</title>
+    <%- include ("partials/head.ejs") %>
     </head>
     <body>
+        <%- include ("partials/menu.ejs") %>
         <div class="limiter">
             <div class="container-table100">
                 <div class="wrap-table100">
@@ -21,11 +24,10 @@
                                     <tr>
                                         <td class="column1"><%= users %></td>
                                         <td class="column2"><a href="users/<%=users%>">show</a></td>
-                                        <td class="column2"><a href="users/<%=users%>/update">modifier</a></td>
-                                        <td class="column2"><a href="users/<%=users%>">delete</a></td>
+                                        <td class="column3"><a href="users/<%=users%>?_method=DELETE">delete</a></td>
                                     </tr>
                                 <% }) %>
-                                    </tbody>
+                             </tbody>
                         </table>
                     </div>
                 </div>

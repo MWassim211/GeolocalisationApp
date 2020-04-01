@@ -6,8 +6,38 @@ const admin = require("./routes/admin");
 const methodOverride = require('method-override');
 const app = express();
 
+//app.use(methodOverride('_method'))
 app.use(express.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(methodOverride(function (req, res) {
+
+  //console.log("overridennn")
+  //console.log(req.body)
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    console.log("youhouuouuu")
+    delete req.body._method
+    return method
+  }
+}));
+
+app.use( function( req, res, next ) {
+  // this middleware will call for each requested
+  // and we checked for the requested query properties
+  // if _method was existed
+  // then we know, clients need to call DELETE request instead
+  if ( req.query._method == 'DELETE' ) {
+      // change the original METHOD
+      // into DELETE method
+      req.method = 'DELETE';
+      // and set requested url to /user/12
+      req.url = req.path;
+  }       
+  next(); 
+});
+
 app.use("/api",api);
 app.use("/admin",admin);
 app.use('/static', express.static(path.join(__dirname, '/public')));

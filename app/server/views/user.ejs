@@ -2,18 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><% user.login %> </title>
+        <%- include ("partials/head.ejs") %>
     </head>
     <body>
+        <%- include ("partials/menu.ejs") %>
        <h3> User login :  <%= user.login %></h3>
-       <h3> User status :  <%= user.connected %></h3>
-       <button id="modify-btn" onclick="display()">Modifier </button>
-    <form >
+       <h3> User status Connected :  <%= user.connected %></h3>
+   
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="update-form" class="form" action="users" method="POST">
+                        <form id="update-form" class="form" action="/admin/users/<%=user.login%>" method="Post" >
                             <input type="hidden" name="_method" value="PUT">
                             <h3 class="text-center text-info">Update User</h3>
                             <div class="form-group">
@@ -32,14 +34,5 @@
                 </div>
             </div>
         </div>
-    </form>
-    <form id="back-form" action="/admin/users">
-        <input type="submit" value="Back TO Users list" />
-    </form>
     </body>
-    <script>
-        function display(){
-            document.getElementById("modify-form").style.display="block";
-        }
-    </script>
 </html>
