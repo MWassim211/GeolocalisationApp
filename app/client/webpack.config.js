@@ -29,7 +29,7 @@ module.exports = {
                 use: [
                 'vue-loader'
                 ],
-            }
+            },
         ],
     },
     

@@ -18,21 +18,20 @@ import { mapState , mapActions } from 'vuex'
 export default {
 	name : 'Position',
 	computed : {
-		...mapState(['LatLon','zoom']),
+		...mapState('appli',['LatLon','zoom']),
 	},
 	mounted() {
 		import('../assets/js/bundle.js')
 	},
 	methods : {
-		...mapActions(['updateLatLonZoom']),
 		updateLat (event) {
-			this.$store.dispatch('updateLatLon',{value : event.target.value , index : 0})
+			this.$store.dispatch('appli/updateLatLon',{value : event.target.value , index : 0})
 		},
 		updateLon (event) {
-			this.$store.dispatch('updateLatLon',{value : event.target.value , index : 1})
+			this.$store.dispatch('appli/updateLatLon',{value : event.target.value , index : 1})
 		},
 		updateZoom (event) {
-			this.$store.dispatch('updateZoom',event.target.value)
+			this.$store.dispatch('appli/updateZoom',event.target.value)
 		},
 		onFormSubmition (){
 			this.$root.$emit("formsubmition"); 

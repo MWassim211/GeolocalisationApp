@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Position from '../components/Position.vue'
 import Carte from '../components/Carte.vue'
 import PosCate from '../components/PosCate.vue'
+import Login from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,10 @@ const routes = [
     path: '/',
     name: 'PosCate',
     component : PosCate 
+  },{
+    path: '/login',
+    name: 'Login',
+    component : Login 
   },
   {
     path: '/about',

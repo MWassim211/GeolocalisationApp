@@ -19,11 +19,16 @@ export default {
         }
     },
     computed : {
-        ...mapState(['LatLon' , 'zoom'])
+        ...mapState('appli',['LatLon' , 'zoom'])
+    },
+    ready() {
+        
+        console.log('done set');
     },
     mounted() {
+
         this.initMap();
-        
+       
         //this.initLayers() 
         this.$root.$on("formsubmition", (datarecieved) => {
             this.map.setView([this.LatLon[0], this.LatLon[1]], this.zoom);
@@ -34,7 +39,8 @@ export default {
         initMap(){
             //Initialisation de la map
             this.map = L.map('map').setView([45.78207, 4.86559], 15); 
-
+            L.Icon.Default.imagePath = '../../node_modules/leaflet/dist/images/';
+            
             // Création d'un "tile layer" (permet l'affichage sur la carte)
             this.tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibTFpZjEzIiwiYSI6ImNqczBubmhyajFnMnY0YWx4c2FwMmRtbm4ifQ.O6W7HeTW3UvOVgjCiPrdsA', {
 		    maxZoom: 20,
@@ -45,7 +51,8 @@ export default {
 		    id: 'mapbox.streets'
             });
             this.tileLayer.addTo(this.map);
-            //L.marker([45.78207, 4.86559]).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
+            L.marker([45.78207, 4.86559], {color : 'red'}).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
+            L.marker([45.78207, 4.86559]).addTo(this.map)   ;
             //console.log("init executed");
         }
     }
