@@ -4,9 +4,9 @@ var axios = require("axios");
 
 var GeoResource = require("../classes/GeoResource");
 
-var tab = [];
-tab.push(new GeoResource());
-tab.push(new GeoResource());
+var GeoResourcesTab = [];
+GeoResourcesTab.push(new GeoResource());
+GeoResourcesTab.push(new GeoResource());
 
 function authenticate(req) {
     return axios.get("http://192.168.75.26:8080/authenticate",{
@@ -17,12 +17,14 @@ function authenticate(req) {
     })
 }
 
+
+
 router.get("/resources",(req,res)=>{
     authenticate(req)
     .then(function (response) { 
         // handle success 
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(  tab ));
+        res.end(JSON.stringify(  GeoResourcesTab ));
     })
     .catch(function (error) {
         // handle error
@@ -45,9 +47,13 @@ router.put("/resources/:resourceId/position",(req,res)=>{
             res.status(400).send("Invalid position object");
         }
 
-        let resource = tab.find(element => element.id == resourceId);
+        let resource = GeoResourcesTab.find(element => element.id == resourceId);
         if (!resource){
-            res.status(404);
+            //res.status(404);
+            resource = new GeoResource(resourceId);
+            GeoResourcesTab.push(resource);
+            console.log('pushhhhh');
+            
         }
         resource.position=position;
         res.sendStatus(204);
@@ -73,7 +79,7 @@ router.put("/resources/:resourceId/image",(req,res)=>{
             res.status(400).send("Invalid url object");
         }
 
-        let resource = tab.find(element => element.id == resourceId);
+        let resource = GeoResourcesTab.find(element => element.id == resourceId);
         if (!resource){
             res.sendStatus(404);
         }
@@ -89,4 +95,7 @@ router.put("/resources/:resourceId/image",(req,res)=>{
     })
 })
 
-module.exports = router;
+module.exports = {
+    router,
+    GeoResourcesTab
+}

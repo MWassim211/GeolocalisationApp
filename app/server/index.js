@@ -6,6 +6,8 @@ const admin = require("./routes/admin");
 const methodOverride = require('method-override');
 const app = express();
 
+const GeoResourceTab = api.GeoResourcesTab
+
 //app.use(methodOverride('_method'))
 app.use(express.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({extended:true}));
@@ -38,7 +40,7 @@ app.use( function( req, res, next ) {
   next(); 
 });
 
-app.use("/api",api);
+app.use("/api",api.router);
 app.use("/admin",admin);
 app.use('/static', express.static(path.join(__dirname, '/public')));
 
@@ -46,7 +48,7 @@ app.use('/static', express.static(path.join(__dirname, '/public')));
 //app.set("view","./views");
 app.set("view engine","ejs");
 
-//app.get("/admin",(req,res)=>{res.render("index")});
+app.get("/carte",(req,res)=>{res.render("carte" , {GeoResourceTab : GeoResourceTab})});
 //app.get("/creation",(req,res)=>{res.render("creation")});
 //app.post("/register",admin.registerUser);
 

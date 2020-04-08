@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+		<meta charset="UTF-8">
+        <title>M1IF13 - Carte++</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+    </head>
+    <body>
+		<header>
+			<h1>MifMapApp</h1>
+		</header>
+		<section>
+			<h2>Carte</h2>
+			<div class='row'>
+				<div class='col-lg-8'>
+					<section>
+						<div id="map"></div>
+					</section>
+				</div>
+				<div class='col-lg-4'>
+					
+					<div class='col-lg-6'>
+						<button class="button-secondary pure-button" onclick="return displayPeriForm();">Definir périmetre</button>
+						<form id="periForm" onsubmit="return false;" class="pure-form pure-form-stacked" style="display:	none;">
+							<fieldset>
+								<label for="périlat">Périmètre Lattitude : </label> <input type="text" id="perilat" name="perilat" value="">
+								<label for="perilon">Périmètre Longitude : </label> <input type="text" id="perilon" name="perilon" value="">
+								<input  type="submit" value="Send to server" class="pure-button pure-button-active">
+								<button type = "button" class="button-secondary pure-button" onclick="return resetPeriForm();">Reset</button>
+							</fieldset>
+						</form>
+					</div>
+					
+					<div class='col-lg-6'>
+						<button class="button-secondary pure-button" onclick="return displayCibleForm();">Definir Cible	</button>
+							<form id="cibleForm" onsubmit="return false;" class="pure-form pure-form-stacked" style="display:none;">
+								<fieldset>
+									<label for="ciblelat">Cible Lattitude : </label> <input type="text" id="ciblelat" name="ciblelat" value="">
+									<label for="ciblelon">Cible Longitude : </label> <input type="text" id="ciblelon" name="ciblelon" value="">
+									<input type="submit" value="Send to server" class="pure-button pure-button-active">
+									<button type = "button" class="button-secondary pure-button" onclick="return resetCibleForm();">Reset</button>
+								</fieldset>
+							</form>
+					</div>
+					<button>Lunch Game</button>
+				</div>
+			</div>
+
+		</section>
+		<% GeoResourceTab.forEach(function(grt) {%>
+			<p>Hello 
+				<%= grt.id %></p>
+                <% })%>
+				
+				<script src='../static/js/bundle.js' ></script>
+				
+				<script>
+				//updateMap();
+				itialiseMap();
+				var clientGameState =  '<%- JSON.stringify( GeoResourceTab) %>';
+				var clientGameStateJson = JSON.parse(clientGameState);	
+				clientGameStateJson.forEach(element => {
+					addMap(element.position);
+					
+				});
+				
+				function displayPeriForm() {
+					defPeri=true;
+					defCible = false;
+					document.getElementById('periForm').style.display = '';
+					return false;
+				}
+
+				function displayCibleForm() {
+					defPeri=false;
+					defCible = true;
+					document.getElementById('cibleForm').style.display = '';
+					return false;
+				}	
+
+				function resetPeriForm() {
+					defPeri=true;
+					defCible =false;
+					document.getElementById('perilat').value = '';
+					document.getElementById('perilon').value = '';
+					document.getElementById('perilat').disabled = false;
+					document.getElementById('perilon').disabled = false;
+					return false;
+				}
+
+				function resetCibleForm() {
+					defCible = true;
+					defPeri = false;
+					document.getElementById('ciblelat').value = '';
+					document.getElementById('ciblelon').value = '';
+					document.getElementById('ciblelat').disabled = false;
+					document.getElementById('ciblelon').disabled = false;
+					return false;
+				}
+				</script>
+				</body>
+				</html>

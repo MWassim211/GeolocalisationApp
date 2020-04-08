@@ -23,8 +23,8 @@
                                 <% users.forEach(function(users) {%>
                                     <tr>
                                         <td class="column1"><%= users %></td>
-                                        <td class="column2"><a href="users/<%=users%>">show</a></td>
-                                        <td class="column3"><a href="users/<%=users%>?_method=DELETE">delete</a></td>
+                                        <td class="column2"><a href="/admin/users/<%=users%>">show</a></td>
+                                        <td class="column3"><a href="/admin/users/<%=users%>?_method=DELETE">delete</a></td>
                                     </tr>
                                 <% }) %>
                              </tbody>

@@ -2,10 +2,38 @@ var express = require("express");
 var router = express.Router();
 var axios = require("axios").default;
 const notifier = require('node-notifier');
+const api = require("./api");
 
-router.get("/",(req,res)=>{res.render("index")}); 
+var GeoResource = require("../classes/GeoResource");
+var GeoResourceTab = api.GeoResourcesTab;
+
+var Game = require("../classes/Game");
+
+
 router.get("/create",(req,res)=>{res.render("create")});
 router.get("/config",(req,res)=>{res.render('gameConfig')})
+
+
+var gameResource = function(req,res) {
+    axios.get('http://192.168.75.26:8080/users')    
+    .then(function (response) {
+        // handle success 
+        //console.log(response);
+        console.log(response.data);
+        //var usersConnected = response.data.filter(element => element.connected == ture);
+        //usersConnected.forEach(element => {
+        //    GeoResourceTab.push(new GeoResource(element.login));
+        //});
+        //  res.render("index", {GeoResourceTab : GeoResourceTab});
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .then(function () {
+        // always executed
+    });
+}
 
 var registerUser  = function (req,res) {
     axios.post('http://192.168.75.26:8080/users', {
@@ -106,6 +134,7 @@ var deleteUser = function(req,res) {
         console.log('deleteee');
     })
 }
+router.get("/",(req,res)=>{res.render("index", {GeoResourceTab : GeoResourceTab});}); 
 router.post("/register",registerUser);
 router.get("/users",showUsers);
 router.get("/users/:user",showUser);
