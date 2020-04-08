@@ -71,7 +71,7 @@ buildNode :
     - cd app/server/
     - npm install
     - ls
-    - npm run build
+    - npm pack
   artifacts:
       paths:
         - dist/
