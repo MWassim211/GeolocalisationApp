@@ -72,6 +72,8 @@ buildNode :
     - npm install
     - ls
     - npm pack
+    - ls
+    - - scp -o StrictHostKeyChecking=no server-1.0.0.tgz etudiant@192.168.75.26:/home/etudiant
   artifacts:
       paths:
         - dist/
