@@ -94,6 +94,7 @@ deploy:
 deployNode:
   stage : deploy
   script : 
+    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'tar zxvf  server-1.0.0.tgz & cd package & npm install & npm run build > /dev/null & sleep 2'
     - ls
     - tar zxvf  server-1.0.0.tgz
     - ls
