@@ -70,10 +70,11 @@ buildNode :
   script : 
     - cd app/server/
     - npm install
+    - ls
     - npm run build
-    - npm pack
-    - scp -o StrictHostKeyChecking=no server-1.0.0.tgz etudiant@192.168.75.26:/home/etudiant
-
+    artifacts:
+        paths:
+          - dist/
 curl:
   stage : test
   script : 
