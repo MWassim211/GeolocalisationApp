@@ -73,10 +73,8 @@ buildNode :
     - ls
     - npm pack
     - ls
-    - - scp -o StrictHostKeyChecking=no server-1.0.0.tgz etudiant@192.168.75.26:/home/etudiant
-  artifacts:
-      paths:
-        - dist/
+    - scp -o StrictHostKeyChecking=no server-1.0.0.tgz etudiant@192.168.75.26:/home/etudiant
+
 curl:
   stage : test
   script : 
@@ -93,6 +91,19 @@ deploy:
   script : 
     - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'java -jar usersspringboot-0.0.1-SNAPSHOT.jar > /dev/null & sleep 2'
     
+deployNode
+  stage : deploy
+  script : 
+    - ls
+    - tar zxvf  server-1.0.0.tgz
+    - ls
+    - cd package
+    - ls
+    - npm install
+    - ls
+    - npm run build
+    - ls
+
 
     
 
