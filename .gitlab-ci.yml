@@ -93,7 +93,7 @@ deploy:
     
 deployNode:
   stage : deploy
-  image : node:latest
+  image : node:10
   script : 
     - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'ls & tar zxvf server-1.0.0.tgz & cd package & node index.js  & sleep 2'
 
