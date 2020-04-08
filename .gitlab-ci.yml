@@ -72,9 +72,9 @@ buildNode :
     - npm install
     - ls
     - npm run build
-    artifacts:
-        paths:
-          - dist/
+  artifacts:
+      paths:
+        - dist/
 curl:
   stage : test
   script : 
