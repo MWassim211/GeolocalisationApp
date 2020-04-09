@@ -100,7 +100,7 @@ deployNode:
                                                                    sleep 5 & 
                                                                    echo 'ls - al' & ls -al & 
                                                                    echo 'cd package/' &  cd package  & 
-                                                                   ls -l
+                                                                   ls -l's
                                                                    
 
 
