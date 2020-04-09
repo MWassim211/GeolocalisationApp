@@ -95,14 +95,13 @@ deployNode:
   stage : deploy
   image : node:10
   script : 
-    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26  'ls ; 
+    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26  ' 
                                                                    tar xvf server-1.0.0.tgz ;
-                                                                   sleep 5;
-                                                                   ls -l;
                                                                    cd package/ ;
-                                                                   ls -l ;
                                                                    npm install ;
-                                                                   node index.js '
+                                                                   pm2 delete app; 
+                                                                   pm2 start index.js '
+                                                                  
                                                                    
                                                                    
 
