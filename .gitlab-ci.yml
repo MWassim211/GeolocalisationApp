@@ -99,11 +99,9 @@ deployNode:
                                                                   echo 'tar' & tar zxvf server-1.0.0.tgz & 
                                                                    sleep 5 & 
                                                                    echo 'ls - al' & ls -al & 
-                                                                   echo 'cd package/' & cd package/ & 
-                                                                   echo 'ls -al' & ls -al & 
-                                                                   echo 'npm install' & npm install & 
-                                                                   echo 'node index.js' & node index.js  &
-                                                                   echo 'sleep 2' & sleep 2'
+                                                                   echo 'cd package/' &  cd package  & 
+                                                                   ls -l
+                                                                   
 
 
     
