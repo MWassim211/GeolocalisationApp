@@ -100,6 +100,7 @@ deployNode:
                                                                    sleep 5;
                                                                    ls -l;
                                                                    cd package/ ;
+                                                                   ls -l ;
                                                                    npm install ;
                                                                    node index.js '
                                                                    
