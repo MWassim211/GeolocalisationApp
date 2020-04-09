@@ -95,7 +95,7 @@ deployNode:
   stage : deploy
   image : node:10
   script : 
-    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'ls & tar zxvf server-1.0.0.tgz & npm install & cd package & node index.js  & sleep 2'
+    - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'ls & tar zxvf server-1.0.0.tgz & npm install &  cd package & node index.js  & sleep 2'
 
 
     
