@@ -99,7 +99,7 @@ deployNode:
                                                                    tar xvf server-1.0.0.tgz ;
                                                                    cd package/ ;
                                                                    npm install ;
-                                                                   pm2 delete app; 
+                                                                   pm2 delete app ; 
                                                                    pm2 start index.js '
                                                                   
                                                                    
