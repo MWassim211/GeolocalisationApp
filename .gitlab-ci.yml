@@ -98,12 +98,12 @@ deployNode:
     - ssh -t -o StrictHostKeyChecking=no etudiant@192.168.75.26 'echo 'ls' & ls & 
                                                                   echo 'tar' & tar zxvf server-1.0.0.tgz & 
                                                                    sleep 10 & 
-                                                                   echo 'ls -l' & ls -l'
+                                                                   echo 'ls -l' & ls -l
+                                                                   cd package/ & ls -l'
                                                                    
                                                                    
 
 
     
-
-
+d
   
