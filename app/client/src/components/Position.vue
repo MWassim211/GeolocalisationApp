@@ -21,7 +21,8 @@ export default {
 		...mapState('appli',['LatLon','zoom']),
 	},
 	mounted() {
-		import('../assets/js/bundle.js')
+		//import('../assets/js/bundle.js')
+		
 	},
 	methods : {
 		updateLat (event) {

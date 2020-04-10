@@ -75,6 +75,7 @@
                 password : this.password
             })
             .then(success => {
+                console.log("succcccce");
                 this.$router.push('/') // if login is successful redirect him to home page
             })
             .catch(error => {
