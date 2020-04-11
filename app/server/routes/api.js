@@ -10,11 +10,12 @@ GeoResourcesTab.push(new GeoResource());
 
 function authenticate(req) {
     console.log('tarace');
-    console.log(req.get("Authorization"));
+    console.log(req.query.Authorization);
+    console.log('tarace2');
     return axios.get("http://192.168.75.26:8080/authenticate",{
         params: {
-            token : req.get("Authorization"),
-            origin : req.get("Origin")
+            token : req.query.Authorization,
+            origin : req.query.origin
           }
     })
 }
@@ -22,7 +23,6 @@ function authenticate(req) {
 
 
 router.get("/resources",(req,res)=>{
-    console.log(req);
     authenticate(req)
     .then(function (response) { 
         // handle success 
@@ -31,6 +31,7 @@ router.get("/resources",(req,res)=>{
     })
     .catch(function (error) {
         // handle error
+        console.log('ret ' + req)
         res.sendStatus(401)
         console.log(error);
     })
