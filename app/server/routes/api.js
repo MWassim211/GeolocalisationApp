@@ -9,6 +9,8 @@ GeoResourcesTab.push(new GeoResource());
 GeoResourcesTab.push(new GeoResource());
 
 function authenticate(req) {
+    console.log('tarace');
+    console.log(req.get("Authorization"));
     return axios.get("http://192.168.75.26:8080/authenticate",{
         params: {
             token : req.get("Authorization"),
@@ -20,6 +22,7 @@ function authenticate(req) {
 
 
 router.get("/resources",(req,res)=>{
+    console.log(req);
     authenticate(req)
     .then(function (response) { 
         // handle success 
@@ -73,7 +76,6 @@ router.put("/resources/:resourceId/image",(req,res)=>{
     authenticate(req)
     .then(function(response){
         let resourceId = req.params.resourceId;
-        console.log(resourceId);
         let url = req.body.url;
         if (! typeof url == 'string'){
             res.status(400).send("Invalid url object");
@@ -81,9 +83,12 @@ router.put("/resources/:resourceId/image",(req,res)=>{
 
         let resource = GeoResourcesTab.find(element => element.id == resourceId);
         if (!resource){
-            res.sendStatus(404);
+            //res.sendStatus(404);
+            resource = new GeoResource(resourceId);
+            GeoResourcesTab.push(resource);
+            console('doneee');
         }
-
+        resource.position=position;
         resource.url=url;
         res.send(204);
     })    

@@ -7,7 +7,7 @@ const api = require("./api");
 var GeoResource = require("../classes/GeoResource");
 var GeoResourceTab = api.GeoResourcesTab;
 
-var Game = require("../classes/Game");
+var Game ={}
 
 
 router.get("/create",(req,res)=>{res.render("create")});
@@ -134,11 +134,26 @@ var deleteUser = function(req,res) {
         console.log('deleteee');
     })
 }
+
+var setSetting = function (req,res){
+    Game.ttl = req.body.ttl;
+    console.log(req.body);
+    console.log(Game);
+}
+
+var setcible = function (req,res){
+    console.log(req.body);
+    Game.cibleLat = req.body.Hciblelat;
+    Game.cibleLon = req.body.Hciblelon;
+    console.log(Game);
+}
 router.get("/",(req,res)=>{res.render("index", {GeoResourceTab : GeoResourceTab});}); 
 router.post("/register",registerUser);
 router.get("/users",showUsers);
 router.get("/users/:user",showUser);
 router.put("/users/:user",putUser);
 router.delete("/users/:user",deleteUser);
+router.post('/gamesettings',setSetting);
+router.post('/gamecible',setcible);
 
 module.exports = router;

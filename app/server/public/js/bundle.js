@@ -10944,7 +10944,7 @@ return jQuery;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "8f2c4d11474275fbc1614b9098334eae.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "4f0283c6ce28e888000e978e537a6a56.png");
 
 /***/ }),
 
@@ -10957,7 +10957,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "416d91365b44e4b4f4777663e6f009f3.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "a6137456ed160d7606981aa57c559898.png");
 
 /***/ }),
 
@@ -10970,7 +10970,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2b3e1faf89f94a4835397e7a43b4f77d.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "2273e3d8ad9264b7daa5bdbf8e6b47f8.png");
 
 /***/ }),
 
@@ -38031,6 +38031,8 @@ leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.tileLayer('https://api.tiles.mapb
 	if (defCible === true) {
 		document.getElementById('ciblelat').value = e.latlng.lat.toFixed(5);
 		document.getElementById('ciblelon').value = e.latlng.lng.toFixed(5);
+		document.getElementById('Hciblelat').value = e.latlng.lat.toFixed(5);
+		document.getElementById('Hciblelon').value = e.latlng.lng.toFixed(5);
 		document.getElementById('ciblelat').disabled = true;
 		document.getElementById('ciblelon').disabled = true;
 		defCible = false;

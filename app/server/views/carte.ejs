@@ -19,13 +19,12 @@
 					</section>
 				</div>
 				<div class='col-lg-4'>
-					
 					<div class='col-lg-6'>
 						<button class="button-secondary pure-button" onclick="return displayPeriForm();">Definir périmetre</button>
-						<form id="periForm" onsubmit="return false;" class="pure-form pure-form-stacked" style="display:	none;">
+						<form id="periForm" onsubmit="return false;" class="pure-form pure-form-stacked" >
 							<fieldset>
-								<label for="périlat">Périmètre Lattitude : </label> <input type="text" id="perilat" name="perilat" value="">
-								<label for="perilon">Périmètre Longitude : </label> <input type="text" id="perilon" name="perilon" value="">
+								<label for="périlat">Périmètre Lattitude : </label> <input type="text" id="perilat" name="perilat" value="" disabled>
+								<label for="perilon">Périmètre Longitude : </label> <input type="text" id="perilon" name="perilon" value="" disabled>
 								<input  type="submit" value="Send to server" class="pure-button pure-button-active">
 								<button type = "button" class="button-secondary pure-button" onclick="return resetPeriForm();">Reset</button>
 							</fieldset>
@@ -34,10 +33,10 @@
 					
 					<div class='col-lg-6'>
 						<button class="button-secondary pure-button" onclick="return displayCibleForm();">Definir Cible	</button>
-							<form id="cibleForm" action="/admin/gamecible" method ="post" class="pure-form pure-form-stacked" style="display:none;">
+							<form id="cibleForm" action="/admin/gamecible" method ="post" class="pure-form pure-form-stacked" >
 								<fieldset>
-									<label for="ciblelat">Cible Lattitude : </label> <input type="text" id="ciblelat" name="ciblelat" value="">
-									<label for="ciblelon">Cible Longitude : </label> <input type="text" id="ciblelon" name="ciblelon" value="">
+									<label for="ciblelat">Cible Lattitude : </label> <input type="text" id="ciblelat" name="ciblelat" value="" disabled>
+									<label for="ciblelon">Cible Longitude : </label> <input type="text" id="ciblelon" name="ciblelon" value="" disabled>
 									<input  hidden type="text" id="Hciblelat" name="Hciblelat" value="">
 									<input hidden type="text" id="Hciblelon" name="Hciblelon" value="">
 									<input type="submit" value="Send to server" class="pure-button pure-button-active" name="submit">
@@ -45,19 +44,19 @@
 								</fieldset>
 							</form>
 					</div>
-					<button>Lunch Game</button>
+					<form id="ttl" class="form" action="/admin/gamesettings" method="post">
+						<div class="form-group">
+							<label for="ttl" class="text-info">ttl:</label><br>
+							<input type="text" name="ttl" id="ttl" class="form-control">
+						</div>
+						<div class="form-group">
+							<input type="submit" name="submit" class="btn btn-info btn-md" id =" subBtn" value="submit">
+						</div>
+					</form>
 				</div>
 			</div>
 
-			<form id="ttl" class="form" action="/admin/gamesettings" method="post">
-				<div class="form-group">
-					<label for="ttl" class="text-info">ttl:</label><br>
-					<input type="text" name="ttl" id="ttl" class="form-control">
-				</div>
-				<div class="form-group">
-					<input type="submit" name="submit" class="btn btn-info btn-md" id =" subBtn" value="submit">
-				</div>
-			</form>
+			
 		</section>
 		<% GeoResourceTab.forEach(function(grt) {%>
 			<p>Hello 
@@ -77,16 +76,22 @@
 				});
 				
 				function displayPeriForm() {
+					//document.getElementById('periForm').disabled = false;
 					defPeri=true;
 					defCible = false;
-					document.getElementById('periForm').style.display = '';
+					document.getElementById('perilat').disabled = false;
+					document.getElementById('perilon').disabled = false;
+					//document.getElementById('periForm').style.display = '';
 					return false;
 				}
 
 				function displayCibleForm() {
 					defPeri=false;
 					defCible = true;
-					document.getElementById('cibleForm').style.display = '';
+					//document.getElementById('cibleForm').disabled = false;
+					document.getElementById('ciblelat').disabled = false;
+					document.getElementById('ciblelon').disabled = false;
+					//document.getElementById('cibleForm').style.display = '';
 					return false;
 				}	
 
