@@ -14,10 +14,10 @@ function authenticate(req) {
     console.log('tarace2');
     return axios.get("http://192.168.75.26:8080/authenticate",{
         params: {
-            //token : req.query.Authorization,
-            //origin : req.query.origin,
-            token : req.get('Authorization'),
-            origin : req.get('Origin')
+            token : req.query.Authorization,
+            origin : req.query.origin,
+            //token : req.get('Authorization'),
+            //origin : req.get('Origin')
           }
     })
 }
@@ -33,7 +33,6 @@ router.get("/resources",(req,res)=>{
     })
     .catch(function (error) {
         // handle errorgit
-        console.log('ret ' + req)
         res.sendStatus(401)
         console.log(error);
     })
