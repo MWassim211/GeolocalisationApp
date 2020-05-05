@@ -16,7 +16,6 @@
           >
             <v-card class="elevation-12">
               <v-toolbar
-                color="#444"
                 dark
                 flat
               >
@@ -32,7 +31,8 @@
                     name="login"
                     prepend-icon="person"
                     type="text"
-                    v-model="username"
+                   :value="username"
+                   @input ="updateUsername"
                   />
 
                   <v-text-field
@@ -41,13 +41,14 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
-                    v-model="password"
+                    :value="password"
+                    @input="updatePassword"
                   />
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn color="#444" class="white--text" @click.prevent="login">Login</v-btn>
+                <v-btn dark class="white--text" @click.prevent="login">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -58,18 +59,27 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
   export default {
     name : 'Login',
     data () {
         return {
-            username : '',
-            password : '',
+            //username : '',
+            //password : '',
             error : false
         }
     },
+    computed : {
+        ...mapState('user',['username','password'])
+    },
     methods : {
+        updateUsername (value) {
+          this.$store.dispatch("user/updateUsername", {value : value})
+        },
+        updatePassword(value) {
+          this.$store.dispatch("user/updatePassword", {value : value})
+        },
         login () {
-            console.log(this.$store.user)
             this.$store.dispatch('user/login' , {
                 login : this.username,  // login beacuse in rest api it uses logun not username
                 password : this.password

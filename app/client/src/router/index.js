@@ -18,7 +18,7 @@ const routes = [
     name: 'login',
     component : Login 
   },{
-    path: '/gamesettings',
+    path: '/settings',
     name: 'gamesettings',
     component : Gamesettings 
   },

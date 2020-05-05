@@ -2,6 +2,7 @@
     <nav>
         <ul>
             <li><router-link to="/" exact>Home</router-link></li> |
+            <li><router-link to="/settings" exact>Settings</router-link></li> |
             <li><router-link to="/about" exact>About</router-link></li>
         </ul>
     </nav>
