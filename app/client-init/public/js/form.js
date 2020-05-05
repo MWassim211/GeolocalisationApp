@@ -1,7 +1,8 @@
 // MàJ de l'indicateur numérique du zoom
 function updateZoomValue() {
     $('#zoomValue').html($('#zoom').val());
-	updateMap();
+    //updateMap();
+    window.updateMap;
 }
 
 // Abonnement aux événements de changement

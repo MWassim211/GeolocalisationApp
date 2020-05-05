@@ -6,10 +6,16 @@ module.exports = {
     mode : 'development',
     devtool : 'source-map',
     watch : true,
-    entry : './app.js',
+    entry : './index.js',
     output : {
         path : path.resolve("./public/dist"),
-        filename : 'bundle.js'
+        filename : 'bundle.js',
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
     },
     module: {   
         rules: [
