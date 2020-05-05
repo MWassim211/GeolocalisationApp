@@ -6,5 +6,6 @@ class Game {
         this.periRadius = periRadius;
         this.cibleLat = cibleLat;
         this.cibleLon = cibleLon;
+        this.lancerGame = false;
     }
 }

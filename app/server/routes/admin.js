@@ -4,10 +4,12 @@ var axios = require("axios").default;
 const notifier = require('node-notifier');
 const api = require("./api");
 
-var GeoResource = require("../classes/GeoResource");
-var GeoResourceTab = api.GeoResourcesTab;
 
-var Game ={}
+//var GeoResource = require("../classes/GeoResource");
+var GeoResourceTab = api.GeoResourcesTab;
+//console.log(GeoResourceTab.length + 'cc')
+var Game = { ttl : 59}
+    
 
 
 router.get("/create",(req,res)=>{res.render("create")});
@@ -139,15 +141,44 @@ var setSetting = function (req,res){
     Game.ttl = req.body.ttl;
     console.log(req.body);
     console.log(Game);
+    notifier.notify('ttl set with Success');
+    res.redirect('/admin')
 }
 
 var setcible = function (req,res){
-    console.log(req.body);
+    console.log('envoie de la cible');
     Game.cibleLat = req.body.Hciblelat;
     Game.cibleLon = req.body.Hciblelon;
     console.log(Game);
+    notifier.notify('Cible set with Success');
+    res.redirect('/admin')
 }
-router.get("/",(req,res)=>{res.render("index", {GeoResourceTab : GeoResourceTab});}); 
+
+var setperi = function(req,res){
+    console.log(req.body.Hperilat);
+    Game.periLat = req.body.Hperilat;
+    Game.periLon = req.body.Hperilon;
+    console.log(Game);
+    notifier.notify('Perimetre set with Success');
+    res.redirect('/admin')
+}
+
+var lancerGame = function(req,res){
+    Game.lancerGame = true;
+    //LancementGame = true;
+    notifier.notify('Partie lancer avec succés');
+    setTimeout(function() { Game.lancerGame = false }, Game.ttl * 1000);
+    //setTimeout(function() { LancementGame = false }, Game.ttl * 500);
+    //Game.lancerGame = false ;
+    res.redirect('/admin'); 
+}
+
+router.get("/",(req,res)=>{ 
+    console.log(require("./api"));
+    console.log('testtt')
+    res.render("index",{ data : require("./api").GeoResourcesTab});
+    //res.render("user", {user : {login : 'cc', connected : false}});
+}); 
 router.post("/register",registerUser);
 router.get("/users",showUsers);
 router.get("/users/:user",showUser);
@@ -155,5 +186,10 @@ router.put("/users/:user",putUser);
 router.delete("/users/:user",deleteUser);
 router.post('/gamesettings',setSetting);
 router.post('/gamecible',setcible);
+router.post('/gameperi',setperi);
+router.post('/lancerGame',lancerGame)
 
-module.exports = router;
+module.exports = {
+    router,
+    Game
+}

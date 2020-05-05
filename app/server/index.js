@@ -1,27 +1,27 @@
 const express = require("express");
 const path = require('path');
 const bodyParser = require("body-parser");
+const app = express();
 const api = require("./routes/api");
 const admin = require("./routes/admin");
 const methodOverride = require('method-override');
-const app = express();
-
+//var cors = require('cors')
+//app.use(cors())
 const GeoResourceTab = api.GeoResourcesTab
-
-//app.use(methodOverride('_method'))
+console.log(GeoResourceTab)
 app.use(express.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use(function (req, res, next) {
 
   // Website you wish to allow to connect
-  //gres.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
   //res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
   // Request headers you wish to allow
-  //res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Authorization , Origin');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Authorization , Origin');
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
@@ -60,8 +60,8 @@ app.use( function( req, res, next ) {
 });
 
 app.use('/static', express.static(path.join(__dirname, '/public')));
+app.use("/admin",admin.router);
 app.use("/api",api.router);
-app.use("/admin",admin);
 
 // EJS config
 //app.set("view","./views");
@@ -69,7 +69,7 @@ app.set("view engine","ejs");
 
 app.get("/carte",(req,res)=>{res.render("carte" , {GeoResourceTab : GeoResourceTab})});
 //app.get("/creation",(req,res)=>{res.render("creation")});
-//app.post("/register",admin.registerUser);
+//app.post("/register",admin.registerUser); 
 
 app.use(function (req, res, next) {
     res.status(404).send("Sorry can't find that!") // this should be on the top of the stack ??????
