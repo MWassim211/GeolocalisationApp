@@ -2,10 +2,6 @@
    <v-content>
     <v-container fluid>
                 <v-row>
-                    <v-snackbar v-model='lancementNot' :timeout="6000">
-                    <span> Partie Lancer. Bon courage !</span>
-                    <v-btn>Fermer</v-btn>
-      	</v-snackbar>
                 <v-flex xs12 md4 sd4>
                     <gameinfo/> 
                 </v-flex>
@@ -18,7 +14,7 @@
                     <trophies xs12 md12 sd12/>
                 </v-flex>
                 </v-row>
-        <v-divider></v-divider>
+                    <v-divider></v-divider>
                 <carte />
 
     </v-container>

@@ -21,7 +21,7 @@ export default {
     mutations : {
         LOGIN (state,payload) {
             return new Promise ((resolve,reject) => {
-                axios.post("http://192.168.75.26:8080/login",null, {
+                axios.post("https://192.168.75.26:8080/login",null, {
                     params : {
                         login : payload.login,
                         password : payload.password
@@ -75,7 +75,8 @@ export default {
         },
         login (context , payload) {
            return new Promise ((resolve,reject) => {
-            axios.post("http://192.168.75.26:8080/login",null, {
+            //https://192.168.75.26/login
+            axios.post("https://192.168.75.26/login",null, {
                 params : {
                     login : payload.login,
                     password : payload.password
@@ -96,6 +97,7 @@ export default {
         },
         logout(context,payload){
             return new Promise ((resolve,reject) => {
+                //https://192.168.75.26/logout
                 axios.delete("http://192.168.75.26:8080/logout",{
                     data : sessionStorage.getItem('token')
                 })
@@ -115,7 +117,8 @@ export default {
             //context.commit('GAMEPARAMS',payload);
             console.log(context.state.username);
             return new Promise ((resolve,reject) => {
-                axios.put("http://192.168.75.26/api/resources/"+localStorage.getItem('user')+"/image",{url : context.state.userurl},{ params : {
+                //https://192.168.75.26/api/resources
+                axios.put("http://localhost:3376/api/resources/"+localStorage.getItem('user')+"/image",{url : context.state.userurl},{ params : {
                     Authorization : sessionStorage.getItem('token'),
                     origin : document.location.origin
                 }})
@@ -135,7 +138,8 @@ export default {
             console.log(context.state.username);
             console.log(payload);
             return new Promise((resolve,reject)=>{
-                axios.put("http://192.168.75.26/api/resources/"+localStorage.getItem('user')+"/position",{position : payload.LatLon},{ params : {
+                //https://192.168.75.26/api/resources
+                axios.put("http://localhost:3376/api/resources/"+localStorage.getItem('user')+"/position",{position : payload.LatLon},{ params : {
                     Authorization : sessionStorage.getItem('token'),
                     origin : document.location.origin
                 }})
@@ -151,7 +155,8 @@ export default {
         },
         getImage (context,payload) {
             console.log(sessionStorage.getItem('token'));
-            axios.get("http://192.168.75.26/api/resources",{ params : {
+            //https://192.168.75.26/api/resources
+            axios.get("http://localhost:3376/api/resources",{ params : {
                 Authorization : sessionStorage.getItem('token'),
                 origin : document.location.origin
             }})
@@ -170,7 +175,8 @@ export default {
         },
         getUsersInfo(context,payload){
             return new Promise((resolve,reject)=>{
-                axios.get("http://192.168.75.26/api/resources/",{ params : {
+                //https://192.168.75.26/api/resources
+                axios.get("http://localhost:3376/api/resources/",{ params : {
                     Authorization : sessionStorage.getItem('token'),
                     origin : document.location.origin
                 }})
@@ -189,7 +195,8 @@ export default {
         },
         getGameSettings(context,paload){
             return new Promise((resolve,reject)=>{
-                axios.get("http://192.168.75.26/api/gamesettings",{ params : {
+                //https://192.168.75.26/api/gamesettings
+                axios.get("http://localhost:3376/api/gamesettings",{ params : {
                     Authorization : sessionStorage.getItem('token'),
                     origin : document.location.origin
                 }})
