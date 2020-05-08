@@ -15,3 +15,18 @@ TP1 & TP2
  - le répertoire users contient le code de la partie Spring Boot.
 
  - le répertoire simple-client contient le client.
+
+ TP3 & TP4 :
+
+ pour lancer le client : npm run serve dans app/client ==> localhost:3000
+ pour lancer le serveur : node index.js dans app/server ==> localhost:3376
+
+ deroulement d'une partie : 
+
+ 1 - set le perimetre et la cible coté serveur, (ttl si besoin, fixer à 59 par default).
+ 2- coté client : envoyer ma position au serveur
+                  choisir solo ou multi partie
+3 - repaseer coté serveur et lancer l'applicon (button coup d'envoi)
+4- revenir coté client : la partie sera lancé dans un intervale de 4 secondes depuis le moment du clique sur le coup d'envoie depuis le serveur, 
+
+4- partie fini ? cliquer sur nouvelle partie et rafaire le meme processus qu'avant.
