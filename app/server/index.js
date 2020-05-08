@@ -5,8 +5,10 @@ const app = express();
 const api = require("./routes/api");
 const admin = require("./routes/admin");
 const methodOverride = require('method-override');
-//var cors = require('cors')
-//app.use(cors())
+
+var cors = require('cors')
+app.use(cors())
+
 const GeoResourceTab = api.GeoResourcesTab
 console.log(GeoResourceTab)
 app.use(express.json()) // for parsing application/json
