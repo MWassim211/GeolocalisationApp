@@ -7,5 +7,6 @@ class Game {
         this.cibleLat = cibleLat;
         this.cibleLon = cibleLon;
         this.lancerGame = false;
+        this.radius = 1000;
     }
 }

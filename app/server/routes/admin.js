@@ -8,7 +8,7 @@ const api = require("./api");
 //var GeoResource = require("../classes/GeoResource");
 var GeoResourceTab = api.GeoResourcesTab;
 //console.log(GeoResourceTab.length + 'cc')
-var Game = { ttl : 59}
+var Game = { ttl : 60, radius:1000}
     
 
 
@@ -155,10 +155,8 @@ var setcible = function (req,res){
 }
 
 var setperi = function(req,res){
-    console.log(req.body.Hperilat);
     Game.periLat = req.body.Hperilat;
     Game.periLon = req.body.Hperilon;
-    console.log(Game);
     notifier.notify('Perimetre set with Success');
     res.redirect('/admin')
 }
@@ -173,6 +171,11 @@ var lancerGame = function(req,res){
     res.redirect('/admin'); 
 }
 
+var setRadius = function(req,res){
+    Game.Radius = req.body.radius;
+    notifier.notify('Radius set with Success');
+    res.redirect('/admin')
+}
 router.get("/",(req,res)=>{ 
     console.log(require("./api"));
     console.log('testtt')
@@ -187,6 +190,7 @@ router.delete("/users/:user",deleteUser);
 router.post('/gamesettings',setSetting);
 router.post('/gamecible',setcible);
 router.post('/gameperi',setperi);
+router.post('/radius',setRadius)
 router.post('/lancerGame',lancerGame)
 
 module.exports = {
