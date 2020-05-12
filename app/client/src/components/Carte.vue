@@ -62,7 +62,7 @@ export default {
         })
   
         this.$root.$on("addPeriTOmap", (datarecieved) => {
-            this.$store.dispatch('appli/periCircle',L.circle([this.game.periLat,this.game.periLon], {radius : 3000 , color : 'red'}));
+            this.$store.dispatch('appli/periCircle',L.circle([this.game.periLat,this.game.periLon], {radius : this.game.radius , color : 'red'}));
             this.periCircle.addTo(this.map);
         })
 
@@ -101,7 +101,7 @@ export default {
         },
         getUsersInfo(){
             this.allUsers.forEach(element => {
-                L.circle(element.position, {radius : 1000 , color : 'red'}).addTo(this.map);
+                L.circle(element.position, {radius : this.game.radius , color : 'red'}).addTo(this.map);
                 console.log(element.position)
                 L.circle(element.position, {color : 'red'}).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
             });

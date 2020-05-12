@@ -1,7 +1,7 @@
 <template>
 		
 			<v-card justify-center >
-      <v-container fluid>
+      <v-container fluid style="min-height: 400px">
 				<h1 ><v-icon>location_on</v-icon>Position</h1>
 
 		<v-snackbar v-model='lancementNot' :timeout="6000">

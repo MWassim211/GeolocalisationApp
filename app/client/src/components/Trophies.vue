@@ -1,6 +1,6 @@
 <template>
     <v-card>
-                    <v-container fluid  style="max-height: 341px"
+                    <v-container fluid  style="min-height: 260px"
                         class="overflow-y-auto">
                     <h1 ><v-icon>emoji_events</v-icon>  Mes Trophies</h1>
                     {{game}}

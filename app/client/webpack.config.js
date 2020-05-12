@@ -48,7 +48,8 @@ const webpack = require("webpack");
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackPlugin = require('vue-html-webpack-plugin');
 const IconfontWebpackPlugin = require('iconfont-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader');
+var  SWPrecacheWebpackPlugin  =  require ('sw-precache-webpack-plugin');
 
 module.exports = {
     mode : 'development',
@@ -115,6 +116,14 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery"
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new SWPrecacheWebpackPlugin({
+            cacheId: 'my-vue-app',
+            filename: 'service-worker.js',
+            staticFileGlobs: ['dist/**/*.{js,html,css}'],
+            minify: true,
+            stripPrefix: 'dist/'
+          })
+
     ]
 };

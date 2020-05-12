@@ -9,7 +9,7 @@
                     <position/>
                 </v-flex>
                 <v-flex xs12 md4 sd4>
-                    <v-btn xs12 sd12 md12 @click="nouvellePartie"> Nouvelle Partie </v-btn>
+                    <v-btn xs12 md4 sd4 @click="nouvellePartie"> Nouvelle Partie </v-btn>
                     <timer xs12 sd12 md12 ></timer>
                     <trophies xs12 md12 sd12/>
                 </v-flex>
@@ -46,25 +46,19 @@ export default {
             window.clearInterval(this.$store.state.user.timer.ticker)
             this.$root.$emit("ActiveEnvoiePos");
             this.$store.state.appli.otherPlayersMarker.forEach(element => {
-                console.log(this.$store)
                 this.$store.state.appli.map.removeLayer(element);
             });
             await this.$store.dispatch('user/getGameSettings');
             this.$store.state.appli.map.removeLayer(this.$store.state.appli.periCircle);
             this.$store.state.appli.map.removeLayer(this.$store.state.appli.cibleMarker);
-            console.log('test ' + this.$store.state)
             this.$store.state.user.timer.currentTimer = this.$store.state.user.game.ttl - 5 * this.$store.state.user.numPartie;
             if (this.$store.state.user.timer.currentTimer <=0){
                 await this.$store.dispatch('user/getGameSettings');
-                console.log('dertha mais makeshhhhhh .....');
-                console.log(this.$store.state.user.timer.currentTime)
             }
             this.$store.state.user.numPartie++;
             let measuredTime = new Date(null);
             measuredTime.setSeconds(this.$store.state.user.timer.currentTimer);
             this.$store.state.user.timer.formattedTime = measuredTime.toISOString().substr(11, 8);
-            console.log(this.$store.state.user.timer.currentTimer)
-            console.log(this.$store.state.user.timer.formattedTime);
         }
     }
 }

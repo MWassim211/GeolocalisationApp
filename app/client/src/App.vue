@@ -1,5 +1,6 @@
 <template>
 <v-app id="landing-page">
+    
     <!--<app-header v-if="!['login'].includes($route.name)"/>-->
     <Navbar v-if="!['login'].includes($route.name)"/>
     <router-view></router-view>
@@ -41,6 +42,12 @@ export default {
     //              
 //
     //    },
+    beforeMount(){
+         if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+        console.log("frithaa")
+    },
     created() {
 
         if(localStorage.getItem('LATLON')  == null){
@@ -54,6 +61,8 @@ export default {
         }
     },
     mounted () {
+
+       
 
         //window.addEventListener('unload',(event)=>{
         //    sessionStorage.setItem('timer', JSON.stringify(this.$store.state.user.timer));

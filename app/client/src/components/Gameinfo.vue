@@ -1,6 +1,6 @@
 <template>
     <v-card justify-center>
-        <v-container fluid style="max-height: 341px"
+        <v-container fluid style="max-height: 400px"
       class="overflow-y-auto">
             <h1><v-icon>info</v-icon>  Information sur la partie</h1><v-btn  @click="getGameSettings">Get/update Game Info</v-btn>
             
