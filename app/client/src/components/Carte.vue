@@ -16,6 +16,14 @@
 <script>
 import L from 'leaflet';
 import {mapstate, mapState} from 'vuex'
+import { Icon , icon } from 'leaflet';
+
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
 
 export default {
     name : 'Carte',
@@ -46,17 +54,15 @@ export default {
 
 
          this.$root.$on("addcibleTOmap", (datarecieved) => {
-           var greenIcon = L.icon({
-                iconUrl: '../assets/icons/cible.png',
 
-                iconSize:     [38, 95], // size of the icon
-                shadowSize:   [50, 64], // size of the shadow
-                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-                shadowAnchor: [4, 62],  // the same for the shadow
-                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-            });
-
-            this.$store.dispatch('appli/updateCibleInstance',L.marker([this.game.cibleLat,this.game.cibleLon]));
+            this.$store.dispatch('appli/updateCibleInstance',L.marker([this.game.cibleLat,this.game.cibleLon],{
+   icon :  icon ({
+      iconSize : [ 25 , 41 ],
+      iconAnchor : [ 12 , 0  ],
+      iconUrl :  ' 2b3e1faf89f94a4835397e7a43b4f77d.png ' ,
+      iconRetinaUrl :  '680f69f3c2e6b90c1812a813edf67fd7.png' ,
+      shadowUrl :   'a0c6cc1401c107b501efee6477816891.png'
+   })}));
             this.cibleMarker.addTo(this.map).bindPopup('Cible').openPopup();
                    
         })
@@ -68,15 +74,20 @@ export default {
 
         this.$root.$on("addPlayers", (datarecieved) => {
             let userActuell = localStorage.getItem('user');
-            console.log('les markers')
-            console.log(this.otherPlayersMarker);
             this.otherPlayersMarker.forEach(marker=>{
                 this.map.removeLayer(marker)
             })
             this.$store.dispatch('appli/updateAllMarkers',[])
             this.allUsers.forEach(player => {
                 if(player.id != userActuell)
-                    this.otherPlayersMarker.push(L.marker(player.position).addTo(this.map).bindPopup(String(player.id)).openPopup());
+                    this.otherPlayersMarker.push(L.marker(player.position,{
+   icon :  icon ({
+      iconSize : [ 25 , 41 ],
+      iconAnchor : [ 12 , 0 ],
+      iconUrl :  ' 2b3e1faf89f94a4835397e7a43b4f77d.png ' ,
+      iconRetinaUrl :  '680f69f3c2e6b90c1812a813edf67fd7.png' ,
+      shadowUrl :   'a0c6cc1401c107b501efee6477816891.png'
+   })}).addTo(this.map).bindPopup(String(player.id)).openPopup());
             })
         });
 
@@ -84,8 +95,8 @@ export default {
     methods : {
         initMap(){
             this.$store.dispatch('appli/updateMapInstance',L.map('map').setView(this.LatLon, this.zoom));
-            L.Icon.Default.imagePath = '../../node_modules/leaflet/dist/images/';
-            
+            //L.Icon.Default.imagePath = '../../node_modules/leaflet/dist/images/';
+
             // Création d'un "tile layer" (permet l'affichage sur la carte)
             this.$store.dispatch('appli/UpdateTileLayerInstance', L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibTFpZjEzIiwiYSI6ImNqczBubmhyajFnMnY0YWx4c2FwMmRtbm4ifQ.O6W7HeTW3UvOVgjCiPrdsA', {
             maxZoom: 20,
@@ -96,13 +107,20 @@ export default {
 		    id: 'mapbox.streets'
             }));
             this.tileLayer.addTo(this.map);
-            this.$store.dispatch('appli/updateMarkerInstance',L.marker(this.LatLon, {color : 'red'}).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup())
-            this.mymarker.addTo(this.map).bindPopup('Je suis ici !').openPopup();
+            //this.$store.dispatch('appli/updateMarkerInstance',L.marker(this.LatLon));
+            this.$store.dispatch('appli/updateMarkerInstance',L.marker(this.LatLon, {
+   icon :  icon ({
+      iconSize : [ 25 , 41 ],
+      iconAnchor : [ 12 , 0 ],
+      iconUrl :  ' 2b3e1faf89f94a4835397e7a43b4f77d.png ' ,
+      iconRetinaUrl :  '680f69f3c2e6b90c1812a813edf67fd7.png' ,
+      shadowUrl :   'a0c6cc1401c107b501efee6477816891.png'
+   })}));
+            this.mymarker.addTo(this.map).bindPopup('Je suis iciii !').openPopup();
         },
         getUsersInfo(){
             this.allUsers.forEach(element => {
                 L.circle(element.position, {radius : this.game.radius , color : 'red'}).addTo(this.map);
-                console.log(element.position)
                 L.circle(element.position, {color : 'red'}).addTo(this.map).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
             });
 		}
@@ -113,7 +131,17 @@ export default {
 </script>
 
 <style scoped>
-
+.leaflet-popup-tip-container {
+width: 40px;
+height: 20px;
+position: relative;
+left: 50%;
+top: -117px;
+margin-left: -20px;
+overflow: hidden;
+pointer-events: none;
+transform: rotate(180deg);
+}
 
 
 </style>

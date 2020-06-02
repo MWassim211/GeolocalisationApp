@@ -16,7 +16,8 @@ export default {
             formattedTime : "00:00:59",
             ticker : undefined
         },
-        numPartie : 0
+        numPartie : 0,
+        score : 0
     },
     mutations : {
         LOGIN (state,payload) {
@@ -226,10 +227,10 @@ export default {
             context.state.timer.currentTimer--;
             if(context.state.timer.currentTimer <= 0) {
                 window.clearInterval(context.state.timer.ticker)
-                //this.currentTimer = 0;
-                //this.formattedTime = "00:00:59";
                 context.state.lose = true;
-                
+                if(window.navigator.vibrate) {
+                    window.navigator.vibrate(200);
+                }
             }
             let measuredTime = new Date(null);
             measuredTime.setSeconds(context.state.timer.currentTimer);

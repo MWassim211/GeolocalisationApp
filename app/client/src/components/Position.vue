@@ -19,7 +19,7 @@
         <v-btn>Fermer</v-btn>
       	</v-snackbar>
 
-		<v-snackbar v-model='this.$store.state.user.lose' :timeout="6000">
+		<v-snackbar v-model='this.lose' :timeout="6000">
         <span> Fin de partie </span>
         <v-btn>Fermer</v-btn>
       	</v-snackbar>
@@ -64,7 +64,7 @@
     			</v-flex>
 				
 			<v-flex class="text-center">
-       				<v-btn depressed :disabled="envoyerPos" @click.prevent="sendPosition">Envoyer Position</v-btn>
+       				<v-btn depressed :disabled="envoyerPos" @click.prevent="sendPosition">Envoyerr Position</v-btn>
 			</v-flex>  
 			<v-spacer></v-spacer>
 			<v-flex class="text-center">
@@ -164,11 +164,9 @@ export default {
 					this.$store.state.user.timer.formattedTime = measuredTime.toISOString().substr(11, 8);
 				if (this.$store.state.user.game.lancerGame == true){
 					this.$store.state.user.timer.currentTimer = this.$store.state.user.game.ttl - 5 * this.$store.state.user.numPartie;
-					console.log('la valeurrr : ' + this.$store.state.user.timer.currentTimer)
 					let measuredTime = new Date(null);
             		measuredTime.setSeconds(this.$store.state.user.timer.currentTimer);
 					this.$store.state.user.timer.formattedTime = measuredTime.toISOString().substr(11, 8);
-					console.log('me temps que je veux :' + this.$store.state.user.timer.formattedTime)
 					clearInterval(pullServer);
 					if (!lanched){
 						this.lancerTimerSolo();
@@ -179,7 +177,6 @@ export default {
 			},4000)
 		},
 		async lancerTimer(){
-			console.log("lanciit deux fois !")
 			this.lancementNot = true;
 			this.lancerPartie = false;
 			await this.getUsersInfo();
@@ -266,6 +263,7 @@ export default {
 			var distance = LGEO.length( [L.latLng(this.LatLon[0],this.LatLon[1]),L.latLng(this.game.cibleLat,this.game.cibleLon)] );
 			if (distance < this.distanceMinToWin){
 				this.win = true;
+				this.score = this.score + 10;
 				clearInterval(this.updatePositionServer)
 			}
 			this.mymarker.setLatLng(this.LatLon).bindPopup('En mouvement!!');
