@@ -38094,14 +38094,14 @@ function updateMap() {
 }
 
 function itialiseMap() {
-	leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.marker([45.78207, 4.86559], {
-		icon: Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["icon"])({
-		  iconSize: [ 25, 41 ],
-		  iconAnchor: [ 13, 41 ],
-		  iconUrl: '/static/marker-icon.png',
-		  shadowUrl: '/static/marker-shadow.png'
-		})
-	  }).addTo(mymap).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
+	//L.marker([45.78207, 4.86559], {
+	//	icon: icon({
+	//	  iconSize: [ 25, 41 ],
+	//	  iconAnchor: [ 13, 41 ],
+	//	  iconUrl: '/static/marker-icon.png',
+	//	  shadowUrl: '/static/marker-shadow.png'
+	//	})
+	//  }).addTo(mymap).bindPopup('Entrée du bâtiment<br><strong>Nautibus</strong>.').openPopup();
 	mymap.setView([45.782, 4.8656], 15);
 	return false;
 }
@@ -38109,8 +38109,8 @@ function itialiseMap() {
 function addCible(LatLon){
 	return leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.marker(LatLon, {
 		icon: Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["icon"])({
-		  iconSize: [ 25, 41 ],
-		  iconAnchor: [ 13, 41 ],
+		  iconSize : [ 25 , 41 ],
+		  iconAnchor : [ 12 , 0 ],
 		  iconUrl: '/static/target.png',
 		  shadowUrl: '/static/marker-shadow.png'
 		})
@@ -38121,8 +38121,8 @@ function addCible(LatLon){
 function addMap(element) {
 	leaflet__WEBPACK_IMPORTED_MODULE_0___default.a.marker(element.position, {
 		icon: Object(leaflet__WEBPACK_IMPORTED_MODULE_0__["icon"])({
-		  iconSize: [ 25, 41 ],
-		  iconAnchor: [ 13, 41 ],
+		  iconSize : [ 25 , 41 ],
+		  iconAnchor : [ 12 , 0 ],
 		  iconUrl: '/static/marker-icon.png',
 		  shadowUrl: '/static/marker-shadow.png'
 		})

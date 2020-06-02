@@ -106,8 +106,8 @@ function itialiseMap() {
 function addCible(LatLon){
 	return L.marker(LatLon, {
 		icon: icon({
-		  iconSize: [ 25, 41 ],
-		  iconAnchor: [ 13, 41 ],
+		  iconSize : [ 25 , 41 ],
+		  iconAnchor : [ 12 , 0 ],
 		  iconUrl: '/static/target.png',
 		  shadowUrl: '/static/marker-shadow.png'
 		})
@@ -118,8 +118,8 @@ function addCible(LatLon){
 function addMap(element) {
 	L.marker(element.position, {
 		icon: icon({
-		  iconSize: [ 25, 41 ],
-		  iconAnchor: [ 13, 41 ],
+		  iconSize : [ 25 , 41 ],
+		  iconAnchor : [ 12 , 0 ],
 		  iconUrl: '/static/marker-icon.png',
 		  shadowUrl: '/static/marker-shadow.png'
 		})
