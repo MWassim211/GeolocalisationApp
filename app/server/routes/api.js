@@ -6,14 +6,9 @@ const adminSettings = require("./admin");
 var GeoResource = require("../classes/GeoResource");
 
 var GeoResourcesTab = [];
-GeoResourcesTab.push(new GeoResource("toto1"));
-GeoResourcesTab.push(new GeoResource("toto2"));
+//GeoResourcesTab.push(new GeoResource("toto1"));
+//GeoResourcesTab.push(new GeoResource("toto2"));
 var Game = adminSettings.Game;
-
-
-
-
-
 
 function authenticate(req) {
     console.log('tarace');
