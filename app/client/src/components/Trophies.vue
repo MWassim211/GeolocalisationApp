@@ -3,7 +3,7 @@
             <v-container fluid  style="min-height: 260px"
                 class="overflow-y-auto">
             <h1 ><v-icon>emoji_events</v-icon>  Mes Trophies</h1>
-            <h1>Score Actuel : </h1> {{score}}
+            <h1>Score Actuel : </h1> {{this.$store.state.user.score}}
             </v-container >
     </v-card>
            

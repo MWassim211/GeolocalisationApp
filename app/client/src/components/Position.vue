@@ -88,7 +88,7 @@ export default {
 	data () {
 		return {
 			envoyerPos : false,
-			distanceMinToWin : 2,
+			distanceMinToWin : 5,
 			lancerPartie : false,
 			lancementNot : false,
 			activer: true,
@@ -254,7 +254,7 @@ export default {
 			this.track = navigator.geolocation.watchPosition(this.successPosition)
 			this.updatePositionServer = setInterval(() => {
 				this.$store.dispatch('user/setPosition',{LatLon : this.$store.state.appli.LatLon});
-			}, 4000);
+			}, 500);
 		},
 		successPosition(position) {
 			console.log("je stalk")
@@ -263,13 +263,15 @@ export default {
 			var distance = LGEO.length( [L.latLng(this.LatLon[0],this.LatLon[1]),L.latLng(this.game.cibleLat,this.game.cibleLon)] );
 			if (distance < this.distanceMinToWin){
 				this.win = true;
-				this.score = this.score + 10;
+				//navigator.geolocation.clearWatch(this.track)
+				//clearInterval(this.updatePositionServer) // stoper l'envoie de ma postion au serveur
+				this.$store.state.user.score = this.$store.state.user.score + 10;
 				clearInterval(this.updatePositionServer)
 			}
 			this.mymarker.setLatLng(this.LatLon).bindPopup('En mouvement!!');
 			if (this.$store.state.user.lose){
 				navigator.geolocation.clearWatch(this.track)
-				clearInterval(this.updatePositionServer) // stoper l'envoie de ma postion au sereur
+				//clearInterval(this.updatePositionServer) // stoper l'envoie de ma postion au serveur
 			}
  		}
     
