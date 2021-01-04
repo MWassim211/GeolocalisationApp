@@ -38,11 +38,6 @@ TP4 :
 pour lancer le client : npm run serve dans app/client ==> localhost:3000
 pour lancer le serveur : node index.js dans app/server ==> localhost:3376
 
-Login : 
-un compte pour chaque enseignant a été créer
-   Login : lionel  Mdp : lionel
-   Login : aurelien Mdp : aurelien
-   Login : nathalie Mdp : nathalie
 
 Deroulement d'une partie : 
 
@@ -56,5 +51,5 @@ Deroulement d'une partie :
 
 TP 6 : 
    installation webmanifest : 
-      - Sur votre Téléphone, ouvrer chrome, tapez l'adresse : 192.168.75.26, en haut à doite 3 petits bouton s'affichent, clicker sur ajouter ecran d'acceuil , pour avoir un raccourci d'accès à l'application.
+      - Sur votre Téléphone, ouvrez chrome, tapez l'adresse : 192.168.75.26, en haut à doite 3 petits bouton s'affichent, clicker sur ajouter ecran d'acceuil , pour avoir un raccourci d'accès à l'application.
       - clickez sur ce raccourci dans l'acceuil puis connectez vous et lancer la partie comme indiqué dans le processus en haut.
